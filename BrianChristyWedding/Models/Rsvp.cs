@@ -8,8 +8,6 @@ namespace BrianChristyWedding.Models
 {
     public class Rsvp
     {
-        public int RsvpID { get; set; }
-
         public int InvitationID { get; set; }
         public virtual Invitation Invitation { get; set; }
 

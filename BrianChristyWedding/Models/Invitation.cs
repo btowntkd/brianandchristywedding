@@ -7,7 +7,7 @@ namespace BrianChristyWedding.Models
 {
     public class Invitation
     {
-        public int InvitationID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public int MaxAllowedGuests { get; set; }
 
