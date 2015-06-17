@@ -1,0 +1,26 @@
+﻿@model BrianChristyWedding.Models.Address
+
+<div class="address">
+    @{
+        var addressBuilder = new System.Text.StringBuilder();
+        if (!string.IsNullOrWhiteSpace(Model.AddressLine1))
+        {
+            addressBuilder.AppendLine(Model.AddressLine1);
+        }
+        else
+        {
+            addressBuilder.AppendLine("[Street]");
+        }
+
+        if (!string.IsNullOrWhiteSpace(Model.AddressLine2))
+        { 
+            addressBuilder.AppendLine(Model.AddressLine2);
+        }
+        
+        addressBuilder.AppendFormat("{0}, {1} {2}",
+            string.IsNullOrWhiteSpace(Model.City) ? "[City]" : Model.City,
+            string.IsNullOrWhiteSpace(Model.State) ? "[State]" : Model.State,
+            string.IsNullOrWhiteSpace(Model.Zip) ? "[Zip]" : Model.Zip);
+    }
+    @Html.Raw(Html.Encode(addressBuilder.ToString()).Replace("\n", "<br />"))
+</div>

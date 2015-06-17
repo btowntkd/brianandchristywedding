@@ -11,39 +11,21 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxAllowedGuests)
-        </th>
-        <th>
-            RSVP
-        </th>
+        <th>Shortcode</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Number allowed</th>
+        <th>RSVP</th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxAllowedGuests)
-        </td>
-        <td>
-            @{ 
-                var guestsLink = Html.DisplayText("None");
-                if (item.Rsvp != null)
-                {
-                    guestsLink = Html.ActionLink(
-                        string.Format("{0} guests", item.Rsvp.Guests.Count),
-                        "Index",
-                        "Rsvp");
-                }
-            }
-            @guestsLink
-        </td>
+        <td>@(Html.Raw(item.Shortcode))</td>
+        <td>@(Html.DisplayFor(modelItem => item.Name))</td>
+        <td>@(Html.DisplayFor(modelItem => item.Address))</td>
+        <td>@(Html.DisplayFor(modelItem => item.MaxAllowedGuests))</td>
+        <td>@(item.Rsvp == null ? Html.Raw("None") : Html.ActionLink(string.Format("{0} guests", item.Rsvp.Guests.Count), "Details", "Rsvp"))</td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |

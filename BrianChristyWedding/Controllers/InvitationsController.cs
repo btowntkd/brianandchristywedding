@@ -49,7 +49,7 @@ namespace BrianChristyWedding.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,MaxAllowedGuests")] Invitation invitation)
+        public ActionResult Create([Bind(Include = "ID,Name,MaxAllowedGuests,Address")] Invitation invitation)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace BrianChristyWedding.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,MaxAllowedGuests")] Invitation invitation)
+        public ActionResult Edit([Bind(Include = "ID,Name,MaxAllowedGuests,Address")] Invitation invitation)
         {
             if (ModelState.IsValid)
             {

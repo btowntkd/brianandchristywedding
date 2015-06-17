@@ -9,6 +9,10 @@ namespace BrianChristyWedding.DAL
 {
     public class WeddingContext : DbContext
     {
+        private const string _shortcodeKeyspace = "b0acdfe8761234zv59";
+        private const int _shortcodeOffset = 1234;
+        private readonly ShortCoder _encoder = new ShortCoder(_shortcodeKeyspace, _shortcodeOffset);
+
         public DbSet<Invitation> Invitations { get; set; }
         public DbSet<Rsvp> Rsvps { get; set; }
         public DbSet<Guest> Guests { get; set; }
@@ -23,7 +27,7 @@ namespace BrianChristyWedding.DAL
                 .HasRequired(x => x.Invitation)
                 .WithOptional(y => y.Rsvp);
 
-            //One to many reltionship between RSVP and Guests
+            //One to many relationship between RSVP and Guests
             modelBuilder.Entity<Guest>()
                 .HasRequired(x => x.Rsvp)
                 .WithMany(y => y.Guests)
