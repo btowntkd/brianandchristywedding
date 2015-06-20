@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,9 +9,8 @@ namespace BrianChristyWedding.Models
 {
     public class Invitation
     {
-        private const string _shortcodeKeyspace = "zf13a6c2";
-        private const int _shortcodeOffset = 450;
-        private static readonly ShortCoder _encoder = new ShortCoder(_shortcodeKeyspace, _shortcodeOffset);
+        public const string ShortcodeKeyspace = "0123456789abcdefghijklmnopqrstuvwxyz";
+        public const int ShortcodeLength = 4;
 
         public Invitation()
         {
@@ -19,26 +19,17 @@ namespace BrianChristyWedding.Models
 
         public int ID { get; set; }
         public string Name { get; set; }
+
+        [Display(Name = "Guests allowed")]
         public int MaxAllowedGuests { get; set; }
-        
+
+        [Index(IsUnique = true)]
+        [MaxLength(4)]
+        [Display(Name = "Invitation code")]
+        public string Shortcode { get; set; }
+
         public Address Address { get; set; }
 
         public virtual Rsvp Rsvp { get; set; }
-
-        public string Shortcode
-        {
-            get { return _encoder.Encode(ID); }
-        }
-
-        public static string GetShortcodeFromId(int id)
-        {
-            return _encoder.Encode(id);
-        }
-
-        public static int GetIdFromShortcode(string shortcode)
-        {
-            return (int)_encoder.Decode(shortcode);
-        }
-
     }
 }

@@ -51,6 +51,8 @@ namespace BrianChristyWedding.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,MaxAllowedGuests,Address")] Invitation invitation)
         {
+            var shortcode = new ShortcodeGenerator(Invitation.ShortcodeKeyspace, Invitation.ShortcodeLength);
+            invitation.Shortcode = shortcode.Generate();
             if (ModelState.IsValid)
             {
                 db.Invitations.Add(invitation);

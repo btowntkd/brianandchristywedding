@@ -10,11 +10,12 @@ namespace BrianChristyWedding.DAL
     {
         protected override void Seed(WeddingContext context)
         {
+            var shortcode = new ShortcodeGenerator(Invitation.ShortcodeKeyspace, Invitation.ShortcodeLength);
             var invitations = new List<Invitation>()
             {
-                new Invitation(){ MaxAllowedGuests = 4, Name = "Daniel and Jacqueline Freeman" },
-                new Invitation(){ MaxAllowedGuests = 2, Name = "Cynthia Pratt" },
-                new Invitation(){ MaxAllowedGuests = 2, Name = "John and Shari Coyle" }
+                new Invitation(){ MaxAllowedGuests = 4, Name = "Daniel and Jacqueline Freeman" , Shortcode = shortcode.Generate()},
+                new Invitation(){ MaxAllowedGuests = 2, Name = "Cynthia Pratt" , Shortcode = shortcode.Generate()},
+                new Invitation(){ MaxAllowedGuests = 2, Name = "John and Shari Coyle", Shortcode = shortcode.Generate() }
             };
             invitations.ForEach(x => context.Invitations.Add(x));
             context.SaveChanges();

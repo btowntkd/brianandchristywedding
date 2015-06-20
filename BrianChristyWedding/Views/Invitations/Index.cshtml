@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<BrianChristyWedding.Models.Invitation>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Invitations";
 }
 
-<h2>Index</h2>
+<h2>Invitations</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,8 +18,16 @@
         <th>RSVP</th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+@{ 
+    var total = 0;
+    var answered = 0;
+    var unanswered = 0;
+    var attendingResponses = 0;
+    var notAttendingResponses = 0;
+    var totalGuests = 0;
+}
+@foreach (var item in Model)
+{
     <tr>
         <td>@(Html.Raw(item.Shortcode))</td>
         <td>@(Html.DisplayFor(modelItem => item.Name))</td>
@@ -27,11 +35,67 @@
         <td>@(Html.DisplayFor(modelItem => item.MaxAllowedGuests))</td>
         <td>@(item.Rsvp == null ? Html.Raw("None") : Html.ActionLink(string.Format("{0} guests", item.Rsvp.Guests.Count), "Details", "Rsvp"))</td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
+    total++;
+    if (item.Rsvp != null)
+    {
+        answered++;
+        if(item.Rsvp.Guests.Count > 0)
+        {
+            attendingResponses++;
+            totalGuests += item.Rsvp.Guests.Count;
+        }
+        else
+        {
+            notAttendingResponses++;
+        }
+    }
+    else
+    {
+        unanswered++;
+    }
 }
+</table>
 
+<br />
+<h3>Totals</h3>
+<table class="table-summary table-bordered">
+    <tr>
+        <th></th>
+        <th>Total</th>
+        <th>Answered</th>
+        <th>Unanswered</th>
+        <th>Percent Received</th>
+    </tr>
+    <tr>
+        <th>Invitations</th>
+        <td>@total</td>
+        <td>@answered</td>
+        <td>@unanswered</td>
+        <td>
+            @{ 
+                var percent = ((double)answered / (double)total) * 100.0;
+                @Html.Raw(percent.ToString("N0") + "%");
+            }
+        </td>
+    </tr>
+</table>
+<br />
+<table class="table-summary table-bordered">
+    <tr>
+        <th></th>
+        <th>Not Attending</th>
+        <th>Attending</th>
+        <th>Total Guests</th>
+    </tr>
+    <tr>
+        <th>Responses</th>
+        <td>@attendingResponses</td>
+        <td>@notAttendingResponses</td>
+        <td>@totalGuests</td>
+    </tr>
 </table>

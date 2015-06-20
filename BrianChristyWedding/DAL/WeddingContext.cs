@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using BrianChristyWedding.Models;
+using System.Data.Entity.Infrastructure.Annotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrianChristyWedding.DAL
 {
@@ -11,7 +13,7 @@ namespace BrianChristyWedding.DAL
     {
         private const string _shortcodeKeyspace = "b0acdfe8761234zv59";
         private const int _shortcodeOffset = 1234;
-        private readonly ShortCoder _encoder = new ShortCoder(_shortcodeKeyspace, _shortcodeOffset);
+        private readonly ShortcodeGenerator _encoder = new ShortcodeGenerator(_shortcodeKeyspace, _shortcodeOffset);
 
         public DbSet<Invitation> Invitations { get; set; }
         public DbSet<Rsvp> Rsvps { get; set; }
