@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using BrianChristyWedding.DAL;
@@ -121,6 +122,42 @@ namespace BrianChristyWedding.Controllers
             db.Invitations.Remove(invitation);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Export(string format = "csv")
+        {
+            if (format == "csv")
+            {
+                var invitations = db.Invitations.Include(i => i.Rsvp);
+                var csvResult = new StringBuilder();
+                csvResult.AppendLine(
+                    string.Join(",",
+                        "ID",
+                        "Name",
+                        "Shortcode",
+                        "MaxAllowedGuests",
+                        "AddressLine1",
+                        "AddressLine2",
+                        "City",
+                        "State",
+                        "Zip"));
+                foreach (var invitation in invitations)
+                {
+                    csvResult.AppendLine(
+                        string.Join(",",
+                            invitation.ID,
+                            invitation.Name,
+                            invitation.Shortcode,
+                            invitation.MaxAllowedGuests,
+                            invitation.Address.AddressLine1,
+                            invitation.Address.AddressLine2,
+                            invitation.Address.City,
+                            invitation.Address.State,
+                            invitation.Address.Zip));
+                }
+                return File(System.Text.Encoding.UTF8.GetBytes(csvResult.ToString()), "text/csv", "Invitations.csv");
+            }
+            return HttpNotFound();
         }
 
         protected override void Dispose(bool disposing)
