@@ -11,7 +11,7 @@ namespace BrianChristyWedding.Controllers
 {
     public class RsvpController : Controller
     {
-        private WeddingContext db = new WeddingContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Rsvp
         public ActionResult Index()

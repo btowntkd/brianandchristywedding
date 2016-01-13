@@ -14,7 +14,7 @@ namespace BrianChristyWedding.Controllers
 {
     public class InvitationsController : Controller
     {
-        private WeddingContext db = new WeddingContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Invitations
         public ActionResult Index()

@@ -6,9 +6,9 @@ using BrianChristyWedding.Models;
 
 namespace BrianChristyWedding.DAL
 {
-    public class WeddingInitializer : System.Data.Entity.DropCreateDatabaseAlways<WeddingContext>
+    public class WeddingInitializer : System.Data.Entity.DropCreateDatabaseAlways<ApplicationDbContext>
     {
-        protected override void Seed(WeddingContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             var shortcode = new ShortcodeGenerator(Invitation.ShortcodeKeyspace, Invitation.ShortcodeLength);
             var invitations = new List<Invitation>()
