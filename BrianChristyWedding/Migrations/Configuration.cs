@@ -1,5 +1,8 @@
 namespace BrianChristyWedding.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -26,6 +29,15 @@ namespace BrianChristyWedding.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            //Add default users
+            if (!(context.Users.Any(u => u.UserName == "admin")))
+            {
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                var userToInsert = new ApplicationUser { UserName = "admin" };
+                userManager.Create(userToInsert, "wedding123");
+            }
 
             //var shortcode = new ShortcodeGenerator(Invitation.ShortcodeKeyspace, Invitation.ShortcodeLength);
             //var invitations = new List<Invitation>()
