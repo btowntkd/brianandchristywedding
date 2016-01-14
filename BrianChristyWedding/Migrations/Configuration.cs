@@ -1,70 +1,40 @@
 namespace BrianChristyWedding.Migrations
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BrianChristyWedding.DAL.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<WeddingContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(BrianChristyWedding.DAL.ApplicationDbContext context)
+        protected override void Seed(WeddingContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var shortcodes = new ShortcodeGenerator(Invitation.ShortcodeKeyspace, Invitation.ShortcodeLength);
+            context.Invitations.AddOrUpdate(
+                x => x.ID,
+                new Invitation() { ID = 1, MaxAllowedGuests = 4, Name = "Daniel and Jacqueline Freeman", Shortcode = shortcodes.Generate() },
+                new Invitation() { ID = 2, MaxAllowedGuests = 2, Name = "Cynthia Pratt", Shortcode = shortcodes.Generate() },
+                new Invitation() { ID = 3, MaxAllowedGuests = 2, Name = "John and Shari Coyle", Shortcode = shortcodes.Generate() });
+            context.SaveChanges();
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Rsvps.AddOrUpdate(
+                x => x.InvitationID,
+                new Rsvp() { InvitationID = 1 });
+            context.SaveChanges();
 
-            //Add default users
-            if (!(context.Users.Any(u => u.UserName == "admin")))
-            {
-                var userStore = new UserStore<ApplicationUser>(context);
-                var userManager = new UserManager<ApplicationUser>(userStore);
-                var userToInsert = new ApplicationUser { UserName = "admin" };
-                userManager.Create(userToInsert, "wedding123");
-            }
-
-            //var shortcode = new ShortcodeGenerator(Invitation.ShortcodeKeyspace, Invitation.ShortcodeLength);
-            //var invitations = new List<Invitation>()
-            //{
-            //    new Invitation(){ MaxAllowedGuests = 4, Name = "Daniel and Jacqueline Freeman" , Shortcode = shortcode.Generate()},
-            //    new Invitation(){ MaxAllowedGuests = 2, Name = "Cynthia Pratt" , Shortcode = shortcode.Generate()},
-            //    new Invitation(){ MaxAllowedGuests = 2, Name = "John and Shari Coyle", Shortcode = shortcode.Generate() }
-            //};
-            //invitations.ForEach(x => context.Invitations.Add(x));
-            //context.SaveChanges();
-
-            //var rsvps = new List<Rsvp>()
-            //{
-            //    new Rsvp(){ InvitationID = 1 }
-            //};
-            //rsvps.ForEach(x => context.Rsvps.Add(x));
-            //context.SaveChanges();
-
-            //var guests = new List<Guest>()
-            //{
-            //    new Guest(){ RsvpID = 1, Name = "Dan" },
-            //    new Guest(){ RsvpID = 1, Name = "Jacque" },
-            //    new Guest(){ RsvpID = 1, Name = "Alex" },
-            //    new Guest(){ RsvpID = 1, Name = "Max" }
-            //};
-            //guests.ForEach(x => context.Guests.Add(x));
-            //context.SaveChanges();
+            context.Guests.AddOrUpdate(
+                x => x.GuestID,
+                new Guest() { RsvpID = 1, Name = "Dan" },
+                new Guest() { RsvpID = 1, Name = "Jacque" },
+                new Guest() { RsvpID = 1, Name = "Alex" },
+                new Guest() { RsvpID = 1, Name = "Max" });
+            context.SaveChanges();
         }
     }
 }

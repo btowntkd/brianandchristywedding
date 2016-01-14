@@ -13,24 +13,13 @@ namespace BrianChristyWedding.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Details()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public ActionResult Rsvp(string shortcode)
-        {
-            ViewBag.Message = "RSVP";
-
             return View();
         }
     }
