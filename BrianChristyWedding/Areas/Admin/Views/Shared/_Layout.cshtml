@@ -3,13 +3,15 @@
 }
 <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-            <li class="sidebar-brand">Admin Area</li>
-            <li>@Html.ActionLink("Invitations", "Index", "Invitations", new { area = "Admin" }, null)</li>
-            <li>@Html.ActionLink("RSVPs", "Index", "Rsvps", new { area = "Admin" }, null)</li>
+        <ul class="nav nav-pills nav-stacked">
+            <li class="navbar-header"><h4>Admin Panel</h4></li>
+            <li class="@Html.ActiveController("Invitations", "active")">@Html.ActionLink("Invitations", "Index", "Invitations", new { area = "Admin" }, null)</li>
+            <li class="@Html.ActiveController("Rsvps", "active")">@Html.ActionLink("RSVPs", "Index", "Rsvps", new { area = "Admin" }, null)</li>
         </ul>
     </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        @RenderBody()
+    <div class="col-sm-9 col-md-10">
+        <div class="container">
+            @RenderBody()
+        </div>
     </div>
 </div>
