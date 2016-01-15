@@ -1,0 +1,40 @@
+﻿@model BrianChristyWedding.Models.Invitation
+
+@{
+    ViewBag.Title = "RSVP";
+}
+<div class="container">
+    <h2>RSVP</h2>
+
+    @if (Model == null)
+    {
+        var shortcode = ViewBag.Shortcode ?? "";
+        if (string.IsNullOrWhiteSpace(shortcode))
+        {
+            <p>Please enter your invitation code and click 'Lookup'</p>
+        }
+        else
+        {
+            <h3>Invitation code not found</h3>
+            <p>Please check your code and try again.</p>
+        }
+        <p>
+            @Html.TextBox("txtShortcode", (string)shortcode)
+            <input id="btnSubmit" type="button" value="Lookup" />
+            @section scripts {
+                <script>
+                    $(document).ready(function () {
+                        $("#btnSubmit").click(function () {
+                            window.location = "/Rsvp/" + $("#txtShortcode").val();
+                        });
+                    })
+                </script>   
+            }
+        </p>
+    }
+    else
+    {
+        <h3>Welcome, @Model.Name!</h3>
+    }
+</div>
+
