@@ -158,6 +158,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\InvitationsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RsvpsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -216,6 +217,11 @@
     <Content Include="Areas\Admin\Views\Invitations\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Invitations\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Invitations\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Rsvps\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Rsvps\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Rsvps\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Rsvps\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Rsvps\Index.cshtml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
