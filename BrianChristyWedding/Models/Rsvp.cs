@@ -6,10 +6,13 @@ using System.Web;
 
 namespace BrianChristyWedding.Models
 {
-    public class Rsvp
+    public class Rsvp : ITimestamps
     {
         public int InvitationID { get; set; }
         public virtual Invitation Invitation { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTime Updated { get; set; }
 
         public virtual ICollection<Guest> Guests { get; set; }
     }

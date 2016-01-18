@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
 
 namespace BrianChristyWedding.Models
 {
@@ -30,6 +32,27 @@ namespace BrianChristyWedding.Models
                 .HasRequired(x => x.Rsvp)
                 .WithMany(y => y.Guests)
                 .HasForeignKey(z => z.RsvpID);
+        }
+
+        public override int SaveChanges()
+        {
+            UpdateTimestampEntities();
+            return base.SaveChanges();
+        }
+
+        private void UpdateTimestampEntities()
+        {
+            var entities = ChangeTracker.Entries().Where(x => x.Entity is ITimestamps && (x.State == EntityState.Added || x.State == EntityState.Modified));
+            foreach (var item in entities)
+            {
+                var tstamp = item.Entity as ITimestamps;
+                var now = DateTime.UtcNow;
+                if (item.State == EntityState.Added || tstamp.Created == default(DateTime))
+                {
+                    tstamp.Created = now;
+                }
+                tstamp.Updated = now;
+            }
         }
     }
 }
