@@ -49,7 +49,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,MaxAllowedGuests,Shortcode,Address")] Invitation invitation)
+        public ActionResult Create([Bind(Include = "ID,Name,MaxAllowedGuests,Address")] Invitation invitation)
         {
             if (ModelState.IsValid)
             {

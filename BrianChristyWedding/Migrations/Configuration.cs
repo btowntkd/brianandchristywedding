@@ -29,7 +29,7 @@ namespace BrianChristyWedding.Migrations
             context.SaveChanges();
 
             context.Guests.AddOrUpdate(
-                x => x.GuestID,
+                x => x.RsvpID,
                 new Guest() { RsvpID = 1, Name = "Dan" },
                 new Guest() { RsvpID = 1, Name = "Jacque" },
                 new Guest() { RsvpID = 1, Name = "Alex" },

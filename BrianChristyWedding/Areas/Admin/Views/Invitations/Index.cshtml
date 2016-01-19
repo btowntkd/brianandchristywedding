@@ -33,7 +33,7 @@
         <td>@(Html.DisplayFor(modelItem => item.Name))</td>
         <td>@(Html.DisplayFor(modelItem => item.Address))</td>
         <td>@(Html.DisplayFor(modelItem => item.MaxAllowedGuests))</td>
-        <td>@(item.Rsvp == null ? Html.Raw("None") : Html.ActionLink(string.Format("{0} guests", item.Rsvp.Guests.Count), "Details", "Rsvp"))</td>
+        <td>@(item.Rsvp == null ? Html.Raw("None") : Html.ActionLink(string.Format("{0} guests", item.Rsvp.Guests.Count), "Details", "Rsvps", new { id = item.Rsvp.InvitationID }, null))</td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
             @Html.ActionLink("Details", "Details", new { id = item.ID }) |
