@@ -10,7 +10,7 @@
     var shortcode = ViewBag.Shortcode ?? "";
     if (string.IsNullOrWhiteSpace(shortcode))
     {
-        <p>Please enter your invitation code and click 'Lookup'</p>
+        <p>Please enter your invitation code and click 'Find'</p>
     }
     else
     {
@@ -19,7 +19,7 @@
     }
     <p>
         @Html.TextBox("txtShortcode", (string)shortcode)
-        <input id="btnSubmit" type="button" value="Lookup" />
+        <input id="btnSubmit" type="button" value="Find" class="btn btn-primary" />
         @section scripts {
             <script>
                 $(document).ready(function () {
