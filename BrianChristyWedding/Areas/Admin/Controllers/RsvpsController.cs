@@ -10,6 +10,7 @@ using BrianChristyWedding.Models;
 
 namespace BrianChristyWedding.Areas.Admin.Controllers
 {
+    [BasicAuthentication("admin", "wedding1", BasicRealm = "BrianChristyWedding")]
     public class RsvpsController : Controller
     {
         private WeddingContext db = new WeddingContext();

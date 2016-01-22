@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace BrianChristyWedding.Areas.Admin.Controllers
 {
+    [BasicAuthentication("admin", "wedding1", BasicRealm = "BrianChristyWedding")]
     public class AdminController : Controller
     {
         // GET: Admin/Admin

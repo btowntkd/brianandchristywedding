@@ -159,6 +159,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\InvitationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RsvpsController.cs" />
+    <Compile Include="BasicAuthenticationAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

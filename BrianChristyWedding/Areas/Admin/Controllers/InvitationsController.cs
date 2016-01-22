@@ -11,6 +11,7 @@ using System.Text;
 
 namespace BrianChristyWedding.Areas.Admin.Controllers
 {
+    [BasicAuthentication("admin", "wedding1", BasicRealm = "BrianChristyWedding")]
     public class InvitationsController : Controller
     {
         private WeddingContext db = new WeddingContext();
