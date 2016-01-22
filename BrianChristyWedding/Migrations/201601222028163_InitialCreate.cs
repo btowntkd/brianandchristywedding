@@ -12,7 +12,8 @@ namespace BrianChristyWedding.Migrations
                 c => new
                     {
                         GuestID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        FirstName = c.String(),
+                        LastName = c.String(),
                         RsvpID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.GuestID)
@@ -24,9 +25,11 @@ namespace BrianChristyWedding.Migrations
                 c => new
                     {
                         InvitationID = c.Int(nullable: false),
+                        Created = c.DateTime(nullable: false),
+                        Updated = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.InvitationID)
-                .ForeignKey("dbo.Invitations", t => t.InvitationID)
+                .ForeignKey("dbo.Invitations", t => t.InvitationID, cascadeDelete: true)
                 .Index(t => t.InvitationID);
             
             CreateTable(
@@ -34,7 +37,8 @@ namespace BrianChristyWedding.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        FirstName = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
                         MaxAllowedGuests = c.Int(nullable: false),
                         Shortcode = c.String(maxLength: 4),
                         Address_AddressLine1 = c.String(),

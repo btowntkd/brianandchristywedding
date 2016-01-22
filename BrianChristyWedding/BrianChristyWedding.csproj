@@ -165,17 +165,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelperExtensions.cs" />
-    <Compile Include="Migrations\201601142209238_InitialCreate.cs" />
-    <Compile Include="Migrations\201601142209238_InitialCreate.Designer.cs">
-      <DependentUpon>201601142209238_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601181230312_AddTimestamps.cs" />
-    <Compile Include="Migrations\201601181230312_AddTimestamps.Designer.cs">
-      <DependentUpon>201601181230312_AddTimestamps.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601221848382_AddLastNameColumns.cs" />
-    <Compile Include="Migrations\201601221848382_AddLastNameColumns.Designer.cs">
-      <DependentUpon>201601221848382_AddLastNameColumns.cs</DependentUpon>
+    <Compile Include="Migrations\201601222028163_InitialCreate.cs" />
+    <Compile Include="Migrations\201601222028163_InitialCreate.Designer.cs">
+      <DependentUpon>201601222028163_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -270,14 +262,8 @@
     <Content Include="Scripts\jquery-2.2.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601142209238_InitialCreate.resx">
-      <DependentUpon>201601142209238_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601181230312_AddTimestamps.resx">
-      <DependentUpon>201601181230312_AddTimestamps.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601221848382_AddLastNameColumns.resx">
-      <DependentUpon>201601221848382_AddLastNameColumns.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601222028163_InitialCreate.resx">
+      <DependentUpon>201601222028163_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
