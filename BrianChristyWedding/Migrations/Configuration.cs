@@ -18,9 +18,9 @@ namespace BrianChristyWedding.Migrations
             var shortcodes = new ShortcodeGenerator(Invitation.ShortcodeKeyspace, Invitation.ShortcodeLength);
             context.Invitations.AddOrUpdate(
                 x => x.ID,
-                new Invitation() { ID = 1, MaxAllowedGuests = 4, Name = "Daniel and Jacqueline Freeman", Shortcode = shortcodes.Generate() },
-                new Invitation() { ID = 2, MaxAllowedGuests = 2, Name = "Cynthia Pratt", Shortcode = shortcodes.Generate() },
-                new Invitation() { ID = 3, MaxAllowedGuests = 2, Name = "John and Shari Coyle", Shortcode = shortcodes.Generate() });
+                new Invitation() { ID = 1, MaxAllowedGuests = 4, FirstName = "Daniel and Jacqueline", LastName = "Freeman", Shortcode = shortcodes.Generate() },
+                new Invitation() { ID = 2, MaxAllowedGuests = 2, FirstName = "Cynthia", LastName = "Pratt", Shortcode = shortcodes.Generate() },
+                new Invitation() { ID = 3, MaxAllowedGuests = 2, FirstName = "John and Shari", LastName = "Coyle", Shortcode = shortcodes.Generate() });
             context.SaveChanges();
 
             context.Rsvps.AddOrUpdate(
@@ -29,11 +29,11 @@ namespace BrianChristyWedding.Migrations
             context.SaveChanges();
 
             context.Guests.AddOrUpdate(
-                x => x.RsvpID,
-                new Guest() { RsvpID = 1, Name = "Dan" },
-                new Guest() { RsvpID = 1, Name = "Jacque" },
-                new Guest() { RsvpID = 1, Name = "Alex" },
-                new Guest() { RsvpID = 1, Name = "Max" });
+                x => x.GuestID,
+                new Guest() { GuestID = 1, RsvpID = 1, FirstName = "Dan", LastName = "Freeman" },
+                new Guest() { GuestID = 2, RsvpID = 1, FirstName = "Jacque", LastName = "Freeman" },
+                new Guest() { GuestID = 3, RsvpID = 1, FirstName = "Alex", LastName = "Freeman" },
+                new Guest() { GuestID = 4, RsvpID = 1, FirstName = "Max", LastName = "Freeman" });
             context.SaveChanges();
         }
     }

@@ -50,7 +50,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,MaxAllowedGuests,Address")] Invitation invitation)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,MaxAllowedGuests,Address")] Invitation invitation)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,MaxAllowedGuests,Shortcode,Address")] Invitation invitation)
+        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,MaxAllowedGuests,Shortcode,Address")] Invitation invitation)
         {
             if (ModelState.IsValid)
             {
@@ -132,7 +132,8 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
                 csvResult.AppendLine(
                     string.Join(",",
                         "ID",
-                        "Name",
+                        "FirstName",
+                        "LastName",
                         "Shortcode",
                         "MaxAllowedGuests",
                         "AddressLine1",
@@ -145,7 +146,8 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
                     csvResult.AppendLine(
                         string.Join(",",
                             invitation.ID,
-                            invitation.Name,
+                            invitation.FirstName,
+                            invitation.LastName,
                             invitation.Shortcode,
                             invitation.MaxAllowedGuests,
                             invitation.Address.AddressLine1,

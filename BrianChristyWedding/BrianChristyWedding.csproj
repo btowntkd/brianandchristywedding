@@ -173,6 +173,10 @@
     <Compile Include="Migrations\201601181230312_AddTimestamps.Designer.cs">
       <DependentUpon>201601181230312_AddTimestamps.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601221848382_AddLastNameColumns.cs" />
+    <Compile Include="Migrations\201601221848382_AddLastNameColumns.Designer.cs">
+      <DependentUpon>201601221848382_AddLastNameColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
@@ -185,10 +189,6 @@
     <Compile Include="ShortcodeGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\BrianChristyWedding.mdf" />
-    <Content Include="App_Data\BrianChristyWedding_log.ldf">
-      <DependentUpon>BrianChristyWedding.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -262,6 +262,7 @@
     <Content Include="Views\Home\ContactError.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601181230312_AddTimestamps.resx">
       <DependentUpon>201601181230312_AddTimestamps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601221848382_AddLastNameColumns.resx">
+      <DependentUpon>201601221848382_AddLastNameColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
