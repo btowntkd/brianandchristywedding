@@ -10,7 +10,7 @@
     var shortcode = ViewBag.Shortcode ?? "";
     if (string.IsNullOrWhiteSpace(shortcode))
     {
-        <p>Please enter your invitation code and click 'Find'</p>
+        <p>Please enter your Attendee Code and click 'Find'</p>
     }
     else
     {
@@ -18,15 +18,20 @@
         <p>Please check your code and try again.</p>
     }
     <p>
-        @Html.TextBox("txtShortcode", (string)shortcode)
-        <input id="btnSubmit" type="button" value="Find" class="btn btn-primary" />
+        <form id="formShortcode" class="form-inline">
+            <div class="form-group">
+                @Html.TextBox("txtShortcode", (string)shortcode, new { @class = "form-control" })
+                <input id="btnSubmit" type="submit" value="Find" class="btn btn-primary" />
+            </div>
+        </form>
         @section scripts {
             <script>
                 $(document).ready(function () {
-                    $("#btnSubmit").click(function () {
+                    $("#formShortcode").submit(function (event) {
+                        event.preventDefault();
                         window.location = "/Rsvp/" + $("#txtShortcode").val();
                     });
-                })
+                });
             </script>   
         }
     </p>
