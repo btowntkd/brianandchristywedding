@@ -29,13 +29,26 @@ textarea {
     background-color: aliceblue;
 }
 
-.woodgrain {
+.background {
 	background-attachment: fixed;
-	background-image: url("/Content/img/woodgrain.jpg");
+    background-image: url("/Content/img/pixelbackground.jpg");
+	/*background-image: url("/Content/img/woodgrain.jpg");*/
 }
 
 .countertop {
     margin-top: 12px;
 	background-color: white;
-	box-shadow: 0px 0px 12px 6px rgb(0, 0, 0) !important;
+}
+
+.shadow {
+    box-shadow: 0px 0px 12px 6px rgb(0, 0, 0) !important;
+}
+
+@font-face {
+    font-family: pressStart;
+    src: url(/Content/font/lunchds.ttf) format('truetype');
+}
+
+.jumbotron h1 {
+    font-family: pressStart;
 }
