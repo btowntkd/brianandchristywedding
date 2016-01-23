@@ -41,6 +41,8 @@ namespace BrianChristyWedding.Controllers
                         mail.To.Add("bcpratt@live.com");
                         mail.To.Add("chrispy115@gmail.com");
                         mail.Subject = "Message from Wedding Website";
+                        mail.ReplyToList.Clear();
+                        mail.ReplyToList.Add(contactForm.Email);
                         mail.Body = string.Format("<p>Message from {0} ({1})</p><p>Subject: {2}</p><p></p><p>{3}</p>",
                             contactForm.Name,
                             contactForm.Email,
