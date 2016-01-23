@@ -32,7 +32,6 @@ textarea {
 .background {
 	background-attachment: fixed;
     background-image: url("/Content/img/pixelbackground.jpg");
-	/*background-image: url("/Content/img/woodgrain.jpg");*/
 }
 
 .countertop {
