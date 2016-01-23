@@ -38,6 +38,7 @@ textarea {
 .countertop {
     margin-top: 20px;
 	background-color: white;
+    max-width: 950px;
 }
 
 .shadow {
