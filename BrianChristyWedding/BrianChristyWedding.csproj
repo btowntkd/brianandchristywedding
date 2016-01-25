@@ -173,6 +173,7 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\ITimestamps.cs" />
+    <Compile Include="Models\RsvpSearchViewModel.cs" />
     <Compile Include="Models\WeddingContext.cs" />
     <Compile Include="Models\Guest.cs" />
     <Compile Include="Models\Invitation.cs" />
@@ -254,11 +255,12 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Address.cshtml" />
-    <Content Include="Views\Home\Rsvp.cshtml" />
+    <Content Include="Views\Home\RsvpSearch.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_LayoutFixed.cshtml" />
     <Content Include="Views\Home\ContactSuccess.cshtml" />
     <Content Include="Views\Home\ContactError.cshtml" />
+    <Content Include="Views\Home\RsvpWelcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

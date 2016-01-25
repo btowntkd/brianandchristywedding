@@ -62,16 +62,48 @@ namespace BrianChristyWedding.Controllers
             return View();
         }
 
-        public ActionResult Rsvp(string shortcode)
-        {
-            ViewBag.Shortcode = shortcode;
 
+        [HttpGet]
+        [ActionName("Rsvp")]
+        public ActionResult RsvpSearch(string shortcode)
+        {
             if (!string.IsNullOrWhiteSpace(shortcode))
             {
                 var invitation = db.Invitations.FirstOrDefault(x => x.Shortcode == shortcode);
-                return View(invitation);
+                if (invitation == null)
+                {
+                    ModelState.AddModelError(
+                        "Shortcode",
+                        "Unable to find invitation code \"" + shortcode + ".\"  Please check your code and try again.");
+                    return View("RsvpSearch");
+                }
+                var rsvp = GetOrCreateRsvp(invitation);
+                return View("RsvpWelcome", rsvp);
             }
-            return View();
+            return View("RsvpSearch");
+        }
+
+        [HttpPost]
+        [ActionName("Rsvp")]
+        public ActionResult RsvpSearch([Bind(Include = "Shortcode")] RsvpSearchViewModel rsvpSearch)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Rsvp", new { shortcode = rsvpSearch.Shortcode });
+            }
+            return View("RsvpSearch");
+        }
+
+        [HttpPost]
+        public ActionResult RsvpSubmit([Bind(Include = "Guests")] Rsvp rsvp)
+        {
+
+            return View("RsvpSuccess");
+        }
+
+        protected Rsvp GetOrCreateRsvp(Invitation parent)
+        {
+            return parent.Rsvp ?? new Rsvp() { InvitationID = parent.ID, Invitation = parent };
         }
     }
 }
