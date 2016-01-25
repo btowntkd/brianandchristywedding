@@ -54,3 +54,9 @@ textarea {
 }
 
 .googlemap iframe, .googlemap object, .googlemap embed { width: 100%; }
+
+.shortcode {
+    text-transform: uppercase;
+    font-family: Courier New, Courier, monospace;
+    font-size: 18px;
+}

@@ -43,7 +43,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Shortcode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Shortcode, new { htmlAttributes = new { @class = "form-control" } })
+                <span class="shortcode">
+                    @Html.DisplayFor(model => model.Shortcode)
+                </span>
                 @Html.ValidationMessageFor(model => model.Shortcode, "", new { @class = "text-danger" })
             </div>
         </div>

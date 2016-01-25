@@ -30,7 +30,7 @@
 @foreach (var item in Model)
 {
     <tr>
-        <td>@(Html.Raw(item.Shortcode))</td>
+        <td class="shortcode">@(Html.Raw(item.Shortcode))</td>
         <td>@(Html.DisplayFor(modelItem => item.FirstName))</td>
         <td>@(Html.DisplayFor(modelItem => item.LastName))</td>
         <td>@(Html.DisplayFor(modelItem => item.Address))</td>
