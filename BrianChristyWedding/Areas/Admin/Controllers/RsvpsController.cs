@@ -69,7 +69,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rsvp rsvp = db.Rsvps.Find(id);
+            var rsvp = db.Rsvps.Find(id);
             if (rsvp == null)
             {
                 return HttpNotFound();

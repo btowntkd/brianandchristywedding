@@ -41,7 +41,6 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         // GET: Admin/Invitations/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.Rsvps, "InvitationID", "InvitationID");
             return View();
         }
 
@@ -59,8 +58,6 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.ID = new SelectList(db.Rsvps, "InvitationID", "InvitationID", invitation.ID);
             return View(invitation);
         }
 
