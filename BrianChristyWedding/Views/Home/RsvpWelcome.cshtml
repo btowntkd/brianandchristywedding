@@ -2,3 +2,22 @@
 
 <h2>RSVP</h2>
 <h3>Welcome, @Model.Invitation.FirstName!</h3>
+
+@if(Model.Created == DateTime.MinValue)
+{
+    <h4 class="text-danger">You have not yet submitted an RSVP.</h4>
+    <p>Please answer the questions in the space below.</p>
+}
+else
+{
+    <h4 class="text-success">Your RSVP has been received.</h4>
+    if (Model.Created == Model.Updated)
+    {
+        <p class="text-muted">Submitted on @Model.Created.ToString("D")</p>
+    }
+    else
+    {
+        <p class="text-muted">Last updated @Model.Updated.ToString("D")</p>
+    }
+    <p>You can review and update your answers in the space below.</p>
+}
