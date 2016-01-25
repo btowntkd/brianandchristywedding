@@ -39,7 +39,21 @@ namespace BrianChristyWedding.Models
         public override int SaveChanges()
         {
             UpdateTimestampEntities();
+            GenerateMissingShortcodes();
             return base.SaveChanges();
+        }
+
+        private void GenerateMissingShortcodes()
+        {
+            var entities = ChangeTracker.Entries().Where(x => x.Entity is Invitation && (x.State == EntityState.Added || x.State == EntityState.Modified));
+            foreach (var item in entities)
+            {
+                var invitation = item.Entity as Invitation;
+                if (string.IsNullOrWhiteSpace(invitation.Shortcode))
+                {
+                    invitation.Shortcode = ShortcodeGenerator.Generate();
+                }
+            }
         }
 
         private void UpdateTimestampEntities()

@@ -53,7 +53,6 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                invitation.Shortcode = db.ShortcodeGenerator.Generate();
                 db.Invitations.Add(invitation);
                 db.SaveChanges();
                 return RedirectToAction("Index");
