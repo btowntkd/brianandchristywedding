@@ -20,4 +20,46 @@ else
         <p class="text-muted">Last updated @Model.Updated.ToString("D")</p>
     }
     <p>You can review and update your answers in the space below.</p>
+    <br />
+    <div class="row" id="rowAttendYesNo" style="background-color: #F0F0F0">
+        <br />
+        <div class="text-center">
+            <h4>Are you able to attend?</h4>
+            <button id="btnAttendYes" class="btn btn-primary" style="width: 90px">Yes</button>
+            <button id="btnAttendNo" class="btn btn-danger" style="width: 90px">No</button>
+        </div>
+        <br />
+    </div>
+    <div class="row" id="rowNumGuests" style="background-color: #E0E0E0; display: none;">
+        <br />
+        <div class="text-center">
+            <h4>Wonderful! How many attendees?</h4>
+            <button id="btnNumGuestsOne" class="btn btn-info" style="width: 60px">1</button>
+            <button id="btnNumGuestsTwo" class="btn btn-info" style="width: 60px">2</button>
+            <button id="btnNumGuestsThree" class="btn btn-info" style="width: 60px">3</button>
+            <button id="btnNumGuestsFour" class="btn btn-info" style="width: 60px">4</button>
+            <button id="btnNumGuestsFive" class="btn btn-info" style="width: 60px">5</button>
+        </div>
+        <br />
+    </div>
+    <div class="row" id="rowGuestInfo" style="background-color: #D0D0D0; display: none;">
+        <div class="text-center">
+            <h4>Please provide a few additional details...</h4>
+            <br /><br />
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#btnAttendYes').click(function () {
+                $('#btnAttendYes').addClass('btn-default').removeClass('btn-primary');
+                $('#rowNumGuests').slideDown();
+            })
+            $('#btnAttendNo').click(function () {
+                $('#rowNumGuests').hide();
+            })
+        });
+    </script>
 }
