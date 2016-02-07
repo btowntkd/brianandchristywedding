@@ -77,8 +77,8 @@ namespace BrianChristyWedding.Controllers
                         "Unable to find invitation code \"" + shortcode + ".\"  Please check your code and try again.");
                     return View("RsvpSearch");
                 }
-                var rsvp = GetOrCreateRsvp(invitation);
-                return View("RsvpWelcome", rsvp);
+                var rsvpVM = GetOrCreateRsvpViewModel(invitation);
+                return View("RsvpWelcome", rsvpVM);
             }
             return View("RsvpSearch");
         }
@@ -95,15 +95,16 @@ namespace BrianChristyWedding.Controllers
         }
 
         [HttpPost]
-        public ActionResult RsvpSubmit([Bind(Include = "Guests")] Rsvp rsvp)
+        public ActionResult RsvpSubmit([Bind(Include = "InvitationID,Attending,NumGuests,Guests")] RsvpEntryViewModel rsvp)
         {
 
             return View("RsvpSuccess");
         }
 
-        protected Rsvp GetOrCreateRsvp(Invitation parent)
+        protected RsvpEntryViewModel GetOrCreateRsvpViewModel(Invitation invitation)
         {
-            return parent.Rsvp ?? new Rsvp() { InvitationID = parent.ID, Invitation = parent };
+            var rsvpVM = new RsvpEntryViewModel(invitation);
+            return rsvpVM;
         }
     }
 }
