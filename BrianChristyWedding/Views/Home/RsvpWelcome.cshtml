@@ -100,6 +100,13 @@ else
 
 @section scripts {
     <script>
+        function setInitialState() {
+            var attending = @(Model.Attending.HasValue ? Model.Attending.Value.ToString().ToLower() : "null");
+            var numGuests = @(Model.NumGuests.HasValue ? Model.NumGuests.Value.ToString() : "null");
+
+            setNumGuests(numGuests);
+            setAttending(attending);
+        }
         function onAttendingClicked() {
             var btnIndex = $('.btnAttend').index(this);
             setAttending(btnIndex == 0);
@@ -109,20 +116,29 @@ else
             var btnAttendYes = $('.btnAttend').eq(0);
             var btnAttendNo = $('.btnAttend').eq(1);
 
-            if (value) {
+            if (value == true) {
                 attendingField.val('true');
                 btnAttendYes.addClass('btn-default').removeClass('btn-success');
                 btnAttendNo.addClass('btn-danger').removeClass('btn-default');
                 hideRegretsSection();
                 showNumGuestsSection();
             }
-            else {
+            else if (value == false) {
                 attendingField.val('false');
                 btnAttendYes.addClass('btn-success').removeClass('btn-default');
                 btnAttendNo.addClass('btn-default').removeClass('btn-danger');
                 hideNumGuestsSection();
                 hideGuestListSection();
                 showRegretsSection();
+            }
+            else if(value == null)
+            {
+                attendingField.val('');
+                btnAttendYes.addClass('btn-success').removeClass('btn-default');
+                btnAttendNo.addClass('btn-danger').removeClass('btn-default');
+                hideNumGuestsSection();
+                hideGuestListSection();
+                hideRegretsSection();
             }
         }
 
@@ -133,23 +149,33 @@ else
         }
         function setNumGuests(value) {
             var numGuestsField = $('#NumGuests');
-            numGuestsField.val(value);
-
             $('.btnNumGuests').removeClass('btn-default').addClass('btn-info');
-            $('.btnNumGuests').eq(value - 1).removeClass('btn-info').addClass('btn-default');
-
-            $('.rowGuestInfo').each(function (index) {
-                if (index < value)
-                    showGuestRow(index);
-                else
-                    hideGuestRow(index);
-            });
-
-            showGuestListSection();
+            
+            if(value == null) {
+                numGuestsField.val('');
+                hideGuestListSection();
+            }
+            else {
+                numGuestsField.val(value);
+                $('.btnNumGuests').eq(value - 1).removeClass('btn-info').addClass('btn-default');
+                $('.rowGuestInfo').each(function (index) {
+                    if (index < value)
+                        showGuestRow(index);
+                    else
+                        hideGuestRow(index);
+                });
+                showGuestListSection();
+            }
         }
 
         function showNumGuestsSection() {
             $('#sectionNumGuests').slideDown();
+            
+            var numGuests = $('#NumGuests').val();
+            if(numGuests == '' || numGuests == null)
+                hideGuestListSection();
+            else
+                showGuestListSection();
         }
         function hideNumGuestsSection() {
             $('#sectionNumGuests').hide();
@@ -186,6 +212,7 @@ else
             $('.btnAttend').click(onAttendingClicked);
             $('.btnNumGuests').click(onNumGuestsClicked);
             $('#formRsvp').submit(onSubmit);
+            setInitialState();
         });
     </script>
 }
