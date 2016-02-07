@@ -21,44 +21,93 @@ else
     }
     <p>You can review and update your answers in the space below.</p>
     <br />
-    <div class="row" id="rowAttendYesNo" style="background-color: #F0F0F0">
+    <div class="row" id="sectionAttendYesNo" style="background-color: #F0F0F0">
         <br />
-        <div class="text-center">
+        <div class="text-center center-block">
             <h4>Are you able to attend?</h4>
-            <button id="btnAttendYes" class="btn btn-primary" style="width: 90px">Yes</button>
-            <button id="btnAttendNo" class="btn btn-danger" style="width: 90px">No</button>
+            <button id="btnAttendYes" class="btn btn-success btnAttend" style="width: 90px">Yes</button>
+            <button id="btnAttendNo" class="btn btn-danger btnAttend" style="width: 90px">No</button>
         </div>
         <br />
     </div>
-    <div class="row" id="rowNumGuests" style="background-color: #E0E0E0; display: none;">
+    <div class="row" id="sectionNumGuests" style="background-color: #E0E0E0; display: none;">
         <br />
-        <div class="text-center">
+        <div class="text-center center-block">
             <h4>Wonderful! How many attendees?</h4>
-            <button id="btnNumGuestsOne" class="btn btn-info" style="width: 60px">1</button>
-            <button id="btnNumGuestsTwo" class="btn btn-info" style="width: 60px">2</button>
-            <button id="btnNumGuestsThree" class="btn btn-info" style="width: 60px">3</button>
-            <button id="btnNumGuestsFour" class="btn btn-info" style="width: 60px">4</button>
-            <button id="btnNumGuestsFive" class="btn btn-info" style="width: 60px">5</button>
+            <button id="btnNumGuests1" class="btn btn-info btnNumGuests" style="width: 60px">1</button>
+            <button id="btnNumGuests2" class="btn btn-info btnNumGuests" style="width: 60px">2</button>
+            <button id="btnNumGuests3" class="btn btn-info btnNumGuests" style="width: 60px">3</button>
+            <button id="btnNumGuests4" class="btn btn-info btnNumGuests" style="width: 60px">4</button>
+            <button id="btnNumGuests5" class="btn btn-info btnNumGuests" style="width: 60px">5</button>
         </div>
         <br />
     </div>
-    <div class="row" id="rowGuestInfo" style="background-color: #D0D0D0; display: none;">
-        <div class="text-center">
+    <div class="row" id="sectionGuestInfo" style="background-color: #D0D0D0; display: none;">
+        <div class="center-block col-md-12">
             <h4>Please provide a few additional details...</h4>
-            <br /><br />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Age</th>
+                        <th>Dietary Restrictions?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Guest #1</td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td>
+                            <select>
+                                <option selected>Adult</option>
+                                <option>Child</option>
+                            </select>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Guest #2</td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Guest #3</td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center col-md-12">
+            <button class="btn btn-primary btn-lg" style="width: 90px">Submit</button>
+            <br />
         </div>
     </div>
 }
 
 @section scripts {
     <script>
+        function onAttendingChanged() {
+
+        }
+
+        function onNumGuestsChanged() {
+
+        }
+
         $(document).ready(function () {
-            $('#btnAttendYes').click(function () {
-                $('#btnAttendYes').addClass('btn-default').removeClass('btn-primary');
-                $('#rowNumGuests').slideDown();
+            $('.btnAttend').click(function () {
+                $('#sectionNumGuests').slideDown();
             })
-            $('#btnAttendNo').click(function () {
-                $('#rowNumGuests').hide();
+            $('.btnNumGuests').click(function () {
+                $('#sectionGuestInfo').slideDown();
             })
         });
     </script>
