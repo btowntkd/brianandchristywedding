@@ -18,9 +18,9 @@ namespace BrianChristyWedding.Migrations
             var shortcodes = new ShortcodeGenerator(Invitation.ShortcodeKeyspace, Invitation.ShortcodeLength);
             context.Invitations.AddOrUpdate(
                 x => x.ID,
-                new Invitation() { ID = 1, MaxAllowedGuests = 4, FirstName = "Daniel and Jacqueline", LastName = "Freeman", Shortcode = shortcodes.Generate() },
-                new Invitation() { ID = 2, MaxAllowedGuests = 2, FirstName = "Cynthia", LastName = "Pratt", Shortcode = shortcodes.Generate() },
-                new Invitation() { ID = 3, MaxAllowedGuests = 2, FirstName = "John and Shari", LastName = "Coyle", Shortcode = shortcodes.Generate() });
+                new Invitation() { ID = 1, MaxAllowedGuests = 4, FirstName = "Daniel and Jacqueline", LastName = "Freeman"},
+                new Invitation() { ID = 2, MaxAllowedGuests = 2, FirstName = "Cynthia", LastName = "Pratt"},
+                new Invitation() { ID = 3, MaxAllowedGuests = 2, FirstName = "John and Shari", LastName = "Coyle"});
             context.SaveChanges();
 
             context.Rsvps.AddOrUpdate(

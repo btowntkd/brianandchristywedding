@@ -169,6 +169,10 @@
     <Compile Include="Migrations\201601222028163_InitialCreate.Designer.cs">
       <DependentUpon>201601222028163_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602071435254_AddAgeCategoryToGuest.cs" />
+    <Compile Include="Migrations\201602071435254_AddAgeCategoryToGuest.Designer.cs">
+      <DependentUpon>201602071435254_AddAgeCategoryToGuest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
@@ -274,6 +278,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201601222028163_InitialCreate.resx">
       <DependentUpon>201601222028163_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602071435254_AddAgeCategoryToGuest.resx">
+      <DependentUpon>201602071435254_AddAgeCategoryToGuest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
