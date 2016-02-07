@@ -7,35 +7,38 @@ namespace BrianChristyWedding.Models
 {
     public class RsvpEntryViewModel
     {
+        public RsvpEntryViewModel() : this(null)
+        { }
+
         public RsvpEntryViewModel(Invitation invitation)
         {
-            if(invitation == null)
-                throw new ArgumentNullException(nameof(invitation));
-            Invitation = invitation;
-            InvitationID = invitation.ID;
-
-            var rsvp = Invitation.Rsvp;
-            if (rsvp != null)
+            if (invitation != null)
             {
-                NumGuests = rsvp.Guests.Count;
-                Attending = NumGuests != 0;
-                Guests = new List<Guest>(rsvp.Guests);
-            }
-            else
-            {
-                NumGuests = null;
-                Attending = null;
-                Guests = new List<Guest>();
-            }
+                Invitation = invitation;
+                InvitationID = invitation.ID;
 
-            while (Guests.Count < Invitation.MaxAllowedGuests)
-            {
-                Guests.Add(new Guest());
-            }
+                var rsvp = Invitation.Rsvp;
+                if (rsvp != null)
+                {
+                    NumGuests = rsvp.Guests.Count;
+                    Attending = NumGuests != 0;
+                    Guests = new List<Guest>(rsvp.Guests);
+                }
+                else
+                {
+                    NumGuests = null;
+                    Attending = null;
+                    Guests = new List<Guest>();
+                }
 
+                while (Guests.Count < Invitation.MaxAllowedGuests)
+                {
+                    Guests.Add(new Guest());
+                }
+            }
         }
 
-        public Invitation Invitation { get; private set; }
+        public Invitation Invitation { get; set; }
 
         public int InvitationID { get; set; }
 

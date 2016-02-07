@@ -97,8 +97,15 @@ namespace BrianChristyWedding.Controllers
         [HttpPost]
         public ActionResult RsvpSubmit([Bind(Include = "InvitationID,Attending,NumGuests,Guests")] RsvpEntryViewModel rsvp)
         {
+            if (ModelState.IsValid)
+            {
+                return View("RsvpSuccess");
+            }
 
-            return View("RsvpSuccess");
+            //Persist the invitation data across requests
+            var invitation = db.Invitations.FirstOrDefault(x => x.ID == rsvp.InvitationID);
+            rsvp.Invitation = invitation;
+            return View("RsvpWelcome", rsvp);
         }
 
         protected RsvpEntryViewModel GetOrCreateRsvpViewModel(Invitation invitation)

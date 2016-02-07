@@ -22,95 +22,170 @@ else
         <p class="text-muted">Last updated @updated.ToString("D")</p>
     }
     <p>You can review and update your answers in the space below.</p>
+}
+
+<br />
+@using (Html.BeginForm("RsvpSubmit", "Home", null, FormMethod.Post, new { id = "formRsvp" }))
+{
+<div class="row" id="sectionAttendYesNo" style="background-color: #F0F0F0">
     <br />
-    <div class="row" id="sectionAttendYesNo" style="background-color: #F0F0F0">
-        <br />
-        <div class="text-center center-block">
-            <h4>Are you able to attend?</h4>
-            <button id="btnAttendYes" class="btn btn-success btnAttend" style="width: 90px">Yes</button>
-            <button id="btnAttendNo" class="btn btn-danger btnAttend" style="width: 90px">No</button>
-        </div>
-        <br />
+    <div class="text-center center-block">
+        <h4>Are you able to attend?</h4>
+        @Html.HiddenFor(x => x.InvitationID)
+        @Html.HiddenFor(x => x.Attending)
+
+
+        <div class="btn btn-success btnAttend" style="width: 90px">Yes</div>
+        <div class="btn btn-danger btnAttend" style="width: 90px">No</div>
     </div>
-    <div class="row" id="sectionNumGuests" style="background-color: #E0E0E0; display: none;">
-        <br />
-        <div class="text-center center-block">
-            <h4>Wonderful! How many attendees?</h4>
-            <button id="btnNumGuests1" class="btn btn-info btnNumGuests" style="width: 60px">1</button>
-            <button id="btnNumGuests2" class="btn btn-info btnNumGuests" style="width: 60px">2</button>
-            <button id="btnNumGuests3" class="btn btn-info btnNumGuests" style="width: 60px">3</button>
-            <button id="btnNumGuests4" class="btn btn-info btnNumGuests" style="width: 60px">4</button>
-            <button id="btnNumGuests5" class="btn btn-info btnNumGuests" style="width: 60px">5</button>
-        </div>
-        <br />
+    <br />
+</div>
+<div class="row" id="sectionRegrets" style="background-color: #E0E0E0; display: none;">
+    <div class="text-center center-block">
+        <h4>We're sorry to hear that!</h4>
+        <p>You will be greatly missed.  Please click the 'Submit' button below, to complete your RSVP.</p>
     </div>
-    <div class="row" id="sectionGuestInfo" style="background-color: #D0D0D0; display: none;">
-        <div class="center-block col-md-12">
-            <h4>Please provide a few additional details...</h4>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Age</th>
-                        <th>Dietary Restrictions?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Guest #1</td>
-                        <td><input type="text" /></td>
-                        <td><input type="text" /></td>
-                        <td>
-                            <select>
-                                <option selected>Adult</option>
-                                <option>Child</option>
-                            </select>
-                        </td>
+    <div class="text-center center-block col-md-12">
+        <input id="btnSubmit" type="submit" class="btn btn-primary btn-lg" style="width: 90px" value="Submit" />
+    </div>
+    <br />
+</div>
+<div class="row" id="sectionNumGuests" style="background-color: #E0E0E0; display: none;">
+    <br />
+    <div class="text-center center-block">
+        <h4>Wonderful! How many attendees?</h4>
+        @Html.HiddenFor(x => x.NumGuests)
+
+        @for (int x = 0; x < Model.Invitation.MaxAllowedGuests; x++)
+        {
+            <div class="btn btn-info btnNumGuests" style="width: 60px">@(x + 1)</div>
+        }
+    </div>
+    <br />
+</div>
+<div class="row" id="sectionGuestInfo" style="background-color: #D0D0D0; display: none;">
+    <div class="center-block col-md-12">
+        <h4>Please provide a few additional details...</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Age</th>
+                    <th>Dietary Restrictions?</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int x = 0; x < Model.Invitation.MaxAllowedGuests; x++)
+                {
+                    <tr class="rowGuestInfo">
+                        <td>Guest #@(x + 1)</td>
+                        <td>@Html.EditorFor(y => y.Guests[x].FirstName)</td>
+                        <td>@Html.EditorFor(y => y.Guests[x].LastName)</td>
+                        <td>@Html.EnumDropDownListFor(y => y.Guests[x].Age)</td>
                         <td></td>
                     </tr>
-                    <tr>
-                        <td>Guest #2</td>
-                        <td><input type="text" /></td>
-                        <td><input type="text" /></td>
-                        <td><input type="text" /></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Guest #3</td>
-                        <td><input type="text" /></td>
-                        <td><input type="text" /></td>
-                        <td><input type="text" /></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="text-center col-md-12">
-            <button class="btn btn-primary btn-lg" style="width: 90px">Submit</button>
-            <br />
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
+    <div class="text-center col-md-12">
+        <input id="btnSubmit" type="submit" class="btn btn-primary btn-lg" style="width: 90px" value="Submit" />
+        <br />
+    </div>
+    <br />
+</div>
 }
 
 @section scripts {
     <script>
-        function onAttendingChanged() {
+        function onAttendingClicked() {
+            var btnIndex = $('.btnAttend').index(this);
+            setAttending(btnIndex == 0);
+        }
+        function setAttending(value) {
+            var attendingField = $('#Attending');
+            var btnAttendYes = $('.btnAttend').eq(0);
+            var btnAttendNo = $('.btnAttend').eq(1);
 
+            if (value) {
+                attendingField.val('true');
+                btnAttendYes.addClass('btn-default').removeClass('btn-success');
+                btnAttendNo.addClass('btn-danger').removeClass('btn-default');
+                hideRegretsSection();
+                showNumGuestsSection();
+            }
+            else {
+                attendingField.val('false');
+                btnAttendYes.addClass('btn-success').removeClass('btn-default');
+                btnAttendNo.addClass('btn-default').removeClass('btn-danger');
+                hideNumGuestsSection();
+                hideGuestListSection();
+                showRegretsSection();
+            }
         }
 
-        function onNumGuestsChanged() {
+        function onNumGuestsClicked() {
+            var buttonIndex = $('.btnNumGuests').index(this);
+            var numGuests = buttonIndex + 1;
+            setNumGuests(numGuests);
+        }
+        function setNumGuests(value) {
+            var numGuestsField = $('#NumGuests');
+            numGuestsField.val(value);
 
+            $('.btnNumGuests').removeClass('btn-default').addClass('btn-info');
+            $('.btnNumGuests').eq(value - 1).removeClass('btn-info').addClass('btn-default');
+
+            $('.rowGuestInfo').each(function (index) {
+                if (index < value)
+                    showGuestRow(index);
+                else
+                    hideGuestRow(index);
+            });
+
+            showGuestListSection();
+        }
+
+        function showNumGuestsSection() {
+            $('#sectionNumGuests').slideDown();
+        }
+        function hideNumGuestsSection() {
+            $('#sectionNumGuests').hide();
+        }
+        function showRegretsSection() {
+            $('#sectionRegrets').slideDown();
+        }
+        function hideRegretsSection() {
+            $('#sectionRegrets').hide();
+        }
+        function showGuestListSection() {
+            $('#sectionGuestInfo').slideDown();
+        }
+        function hideGuestListSection() {
+            $('#sectionGuestInfo').hide();
+        }
+        function showGuestRow(index) {
+            $('.rowGuestInfo').eq(index).fadeIn();
+        }
+        function hideGuestRow(index) {
+            $('.rowGuestInfo').eq(index).fadeOut();
+        }
+        function onSubmit() {
+            var numGuests = parseInt($('#NumGuests').val());
+
+            // manually remove the unused rows, so they aren't included in the model
+            $('.rowGuestInfo').each(function (index) {
+                if (index >= numGuests)
+                    $(this).remove();
+            });
         }
 
         $(document).ready(function () {
-            $('.btnAttend').click(function () {
-                $('#sectionNumGuests').slideDown();
-            })
-            $('.btnNumGuests').click(function () {
-                $('#sectionGuestInfo').slideDown();
-            })
+            $('.btnAttend').click(onAttendingClicked);
+            $('.btnNumGuests').click(onNumGuestsClicked);
+            $('#formRsvp').submit(onSubmit);
         });
     </script>
 }
