@@ -85,7 +85,7 @@ namespace BrianChristyWedding.Controllers
 
         [HttpPost]
         [ActionName("Rsvp")]
-        public ActionResult RsvpSearch([Bind(Include = "Shortcode")] RsvpSearchViewModel rsvpSearch)
+        public ActionResult RsvpSearch([Bind(Include = "Shortcode")] RsvpLookupViewModel rsvpSearch)
         {
             if (ModelState.IsValid)
             {

@@ -6,10 +6,12 @@ using System.Web;
 
 namespace BrianChristyWedding.Models
 {
-    public class RsvpSearchViewModel
+    public class RsvpLookupViewModel
     {
         [Required]
         [Display(Name = "Invitation code")]
         public string Shortcode { get; set; }
+
+        RsvpEntryViewModel RsvpEntry { get; set; }
     }
 }

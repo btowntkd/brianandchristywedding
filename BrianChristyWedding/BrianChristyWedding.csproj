@@ -177,7 +177,7 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\ITimestamps.cs" />
-    <Compile Include="Models\RsvpSearchViewModel.cs" />
+    <Compile Include="Models\RsvpLookupViewModel.cs" />
     <Compile Include="Models\RsvpEntryViewModel.cs" />
     <Compile Include="Models\WeddingContext.cs" />
     <Compile Include="Models\Guest.cs" />
