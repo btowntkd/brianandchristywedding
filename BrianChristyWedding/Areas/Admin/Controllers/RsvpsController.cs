@@ -40,7 +40,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         // GET: Admin/Rsvps/Create
         public ActionResult Create()
         {
-            ViewBag.InvitationID = new SelectList(db.Invitations, "ID", "Name");
+            ViewBag.InvitationID = new SelectList(db.Invitations, "ID", "FullName");
             return View();
         }
 

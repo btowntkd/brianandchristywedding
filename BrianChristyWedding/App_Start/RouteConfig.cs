@@ -14,9 +14,9 @@ namespace BrianChristyWedding
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "RsvpShortcode",
-                url: "rsvp/{shortcode}",
-                defaults: new { controller = "Home", action = "Rsvp", shortcode = UrlParameter.Optional });
+                name: "Rsvp",
+                url: "Rsvp/{shortcode}/{action}",
+                defaults: new { controller = "Rsvp", action = "Index", shortcode = UrlParameter.Optional });
 
             routes.MapRoute(
                 name: "Default",

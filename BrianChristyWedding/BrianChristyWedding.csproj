@@ -161,6 +161,7 @@
     <Compile Include="Areas\Admin\Controllers\RsvpsController.cs" />
     <Compile Include="BasicAuthenticationAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RsvpController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,12 +174,16 @@
     <Compile Include="Migrations\201602071435254_AddAgeCategoryToGuest.Designer.cs">
       <DependentUpon>201602071435254_AddAgeCategoryToGuest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602161644382_RsvpAttendingFlag.cs" />
+    <Compile Include="Migrations\201602161644382_RsvpAttendingFlag.Designer.cs">
+      <DependentUpon>201602161644382_RsvpAttendingFlag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\ITimestamps.cs" />
-    <Compile Include="Models\RsvpLookupViewModel.cs" />
     <Compile Include="Models\RsvpEntryViewModel.cs" />
+    <Compile Include="Models\RsvpSearchViewModel.cs" />
     <Compile Include="Models\WeddingContext.cs" />
     <Compile Include="Models\Guest.cs" />
     <Compile Include="Models\Invitation.cs" />
@@ -261,12 +266,13 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Address.cshtml" />
-    <Content Include="Views\Home\RsvpSearch.cshtml" />
+    <Content Include="Views\Rsvp\Search.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_LayoutFixed.cshtml" />
     <Content Include="Views\Home\ContactSuccess.cshtml" />
     <Content Include="Views\Home\ContactError.cshtml" />
-    <Content Include="Views\Home\RsvpWelcome.cshtml" />
+    <Content Include="Views\Rsvp\Welcome.cshtml" />
+    <Content Include="Views\Rsvp\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602071435254_AddAgeCategoryToGuest.resx">
       <DependentUpon>201602071435254_AddAgeCategoryToGuest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602161644382_RsvpAttendingFlag.resx">
+      <DependentUpon>201602161644382_RsvpAttendingFlag.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

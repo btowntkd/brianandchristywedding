@@ -25,7 +25,7 @@ else
 }
 
 <br />
-@using (Html.BeginForm("RsvpSubmit", "Home", null, FormMethod.Post, new { id = "formRsvp" }))
+@using (Html.BeginForm("Submit", "Rsvp", new { shortcode = Model.Invitation.Shortcode }, FormMethod.Post, new { id = "formRsvp" }))
 {
 <div class="row" id="sectionAttendYesNo" style="background-color: #F0F0F0">
     <br />
@@ -81,9 +81,9 @@ else
                 {
                     <tr class="rowGuestInfo">
                         <td>Guest #@(x + 1)</td>
-                        <td>@Html.EditorFor(y => y.Guests[x].FirstName)</td>
-                        <td>@Html.EditorFor(y => y.Guests[x].LastName)</td>
-                        <td>@Html.EnumDropDownListFor(y => y.Guests[x].Age)</td>
+                        <td>@Html.EditorFor(y => y.Guests[x].FirstName)<br />@Html.ValidationMessageFor(y => y.Guests[x].FirstName, "", new { @class = "text-danger" })</td>
+                        <td>@Html.EditorFor(y => y.Guests[x].LastName)<br />@Html.ValidationMessageFor(y => y.Guests[x].LastName, "", new { @class = "text-danger" })</td>
+                        <td>@Html.EnumDropDownListFor(y => y.Guests[x].Age)<br />@Html.ValidationMessageFor(y => y.Guests[x].Age, "", new { @class = "text-danger" })</td>
                         <td></td>
                     </tr>
                 }
@@ -200,10 +200,11 @@ else
         }
         function onSubmit() {
             var numGuests = parseInt($('#NumGuests').val());
+            var attending = $('#Attending').val() == 'true';
 
             // manually remove the unused rows, so they aren't included in the model
             $('.rowGuestInfo').each(function (index) {
-                if (index >= numGuests)
+                if (index >= numGuests || !attending)
                     $(this).remove();
             });
         }

@@ -11,6 +11,8 @@ namespace BrianChristyWedding.Models
         public int InvitationID { get; set; }
         public virtual Invitation Invitation { get; set; }
 
+        public bool Attending { get; set; }
+
         [Display(Name = "Received")]
         public DateTime Created { get; set; }
         [Display(Name = "Last updated")]

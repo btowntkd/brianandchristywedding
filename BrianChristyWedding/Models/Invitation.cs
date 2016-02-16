@@ -26,6 +26,8 @@ namespace BrianChristyWedding.Models
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
+        public string FullName { get { return FirstName + LastName; } }
+
         [Display(Name = "Guests allowed")]
         public int MaxAllowedGuests { get; set; }
 
