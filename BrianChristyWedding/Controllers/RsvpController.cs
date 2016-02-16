@@ -63,7 +63,7 @@ namespace BrianChristyWedding.Controllers
                 };
                 AddOrUpdateRsvp(rsvp);
                 db.SaveChanges();
-                return View("Success");
+                return View("Success", rsvpVM);
             }
             return View("Welcome", rsvpVM);
         }

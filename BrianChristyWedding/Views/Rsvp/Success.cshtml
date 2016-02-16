@@ -1,7 +1,16 @@
-﻿
+﻿@model BrianChristyWedding.Models.RsvpEntryViewModel
 @{
     ViewBag.Title = "Success";
 }
 
 <h2>Success</h2>
-
+<p>Your RSVP was successfully submitted.</p>
+@if (Model.Attending.GetValueOrDefault())
+{
+    <p>We can't wait to see you there!</p>
+}
+else
+{
+    <p>We're sorry to hear that you won't be able to celebrate with us!  Your presence will be missed.</p>
+}
+<p>You can @Html.ActionLink("view and edit your RSVP", "Index", new { shortcode = Model.Invitation.Shortcode }) at any time, if anything changes!</p>
