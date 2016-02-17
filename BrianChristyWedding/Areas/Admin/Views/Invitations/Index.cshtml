@@ -20,12 +20,13 @@
         <th></th>
     </tr>
 @{ 
-    var total = 0;
-    var answered = 0;
-    var unanswered = 0;
-    var attendingResponses = 0;
-    var notAttendingResponses = 0;
-    var totalGuests = 0;
+    var totalInvitations = 0;
+    var totalInvitedGuests = 0;
+    var totalAttendingResponses = 0;
+    var totalNotAttendingResponses = 0;
+    var totalAttendingGuests = 0;
+    var totalNotAttendingGuests = 0;
+
 }
 @foreach (var item in Model)
 {
@@ -42,23 +43,20 @@
             @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
-    total++;
+    totalInvitations++;
+    totalInvitedGuests += item.MaxAllowedGuests;
     if (item.Rsvp != null)
     {
-        answered++;
         if(item.Rsvp.Guests.Count > 0)
         {
-            attendingResponses++;
-            totalGuests += item.Rsvp.Guests.Count;
+            totalAttendingResponses++;
+            totalAttendingGuests += item.Rsvp.Guests.Count;
         }
         else
         {
-            notAttendingResponses++;
+            totalNotAttendingResponses++;
+            totalNotAttendingGuests += item.Rsvp.Guests.Count;
         }
-    }
-    else
-    {
-        unanswered++;
     }
 }
 </table>
@@ -76,12 +74,12 @@
     </tr>
     <tr>
         <th>Invitations</th>
-        <td>@total</td>
-        <td>@answered</td>
-        <td>@unanswered</td>
+        <td>@totalInvitations</td>
+        <td>@(totalAttendingResponses + totalNotAttendingResponses)</td>
+        <td>@(totalInvitations - totalAttendingResponses - totalNotAttendingResponses)</td>
         <td>
             @{ 
-                var percent = ((double)answered / (double)total) * 100.0;
+                var percent = (double)(totalAttendingResponses + totalNotAttendingResponses) / (double)totalInvitations * 100.0;
                 @Html.Raw(percent.ToString("N0") + "%");
             }
         </td>
@@ -91,14 +89,32 @@
 <table class="table">
     <tr>
         <th></th>
-        <th>Not Attending</th>
         <th>Attending</th>
-        <th>Total Guests</th>
+        <th>Not Attending</th>
+        <th>Remaining</th>
     </tr>
     <tr>
         <th>Responses</th>
-        <td>@notAttendingResponses</td>
-        <td>@attendingResponses</td>
-        <td>@totalGuests</td>
+        <td>@totalAttendingResponses</td>
+        <td>@totalNotAttendingResponses</td>
+        <td>@(totalInvitations - (totalAttendingResponses + totalNotAttendingResponses))</td>
+    </tr>
+</table>
+
+<br />
+<table class="table">
+    <tr>
+        <th></th>
+        <th>Attending</th>
+        <th>Not Attending</th>
+        <th>Remaining</th>
+        <th>Worst-Case Scenario</th>
+    </tr>
+    <tr>
+        <th>Guests</th>
+        <td>@totalAttendingGuests</td>
+        <td>@totalNotAttendingGuests</td>
+        <td>@(totalInvitedGuests - (totalAttendingGuests + totalNotAttendingGuests))</td>
+        <td>@(totalInvitedGuests - totalNotAttendingGuests)</td>
     </tr>
 </table>
