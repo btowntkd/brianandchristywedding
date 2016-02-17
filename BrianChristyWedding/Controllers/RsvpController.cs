@@ -65,6 +65,12 @@ namespace BrianChristyWedding.Controllers
                 db.SaveChanges();
                 return View("Success", rsvpVM);
             }
+            else
+            {
+                //Pad the number of guests, with empties
+                while(rsvpVM.Guests.Count < invitation.MaxAllowedGuests)
+                    rsvpVM.Guests.Add(new Guest());
+            }
             return View("Welcome", rsvpVM);
         }
 

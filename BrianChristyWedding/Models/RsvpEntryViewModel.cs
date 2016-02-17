@@ -20,9 +20,9 @@ namespace BrianChristyWedding.Models
                 var rsvp = Invitation.Rsvp;
                 if (rsvp != null)
                 {
-                    NumGuests = rsvp.Guests.Count;
-                    Attending = NumGuests != 0;
-                    Guests = new List<Guest>(rsvp.Guests);
+                    Attending = rsvp.Attending;
+                    NumGuests = rsvp.Attending ? (int?)rsvp.Guests.Count : null;
+                    Guests = rsvp.Guests.ToList();
                 }
                 else
                 {
