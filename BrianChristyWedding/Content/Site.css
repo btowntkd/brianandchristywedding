@@ -45,12 +45,19 @@ textarea {
 }
 
 @font-face {
-    font-family: pressStart;
-    src: url(/Content/font/lunchds.ttf) format('truetype');
+    font-family: 'pressStart';
+    src: url('/Content/font/lunchds-webfont.eot');
+    src: url('/Content/font/lunchds-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Content/font/lunchds-webfont.woff2') format('woff2'),
+         url('/Content/font/lunchds-webfont.woff') format('woff'),
+         url('/Content/font/lunchds-webfont.ttf') format('truetype'),
+         url('/Content/font/lunchds-webfont.svg#lunchtime_doubly_soregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .jumbotron h1 {
-    font-family: pressStart;
+    font-family: 'pressStart';
 }
 
 .googlemap iframe, .googlemap object, .googlemap embed { width: 100%; }

@@ -196,6 +196,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font\lunchds-webfont.svg" />
     <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\HoldingHand_5x.png" />
     <Content Include="Content\img\pixelbackground.jpg" />
@@ -233,8 +234,10 @@
     <Content Include="Areas\Admin\Views\Rsvps\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Rsvps\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Rsvps\Index.cshtml" />
-    <Content Include="Content\font\lunchds.ttf" />
-    <Content Include="Content\font\PrStart.ttf" />
+    <Content Include="Content\font\lunchds-webfont.eot" />
+    <Content Include="Content\font\lunchds-webfont.ttf" />
+    <Content Include="Content\font\lunchds-webfont.woff" />
+    <Content Include="Content\font\lunchds-webfont.woff2" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
