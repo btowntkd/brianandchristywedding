@@ -23,12 +23,14 @@ namespace BrianChristyWedding.Models
                     Attending = rsvp.Attending;
                     NumGuests = rsvp.Attending ? (int?)rsvp.Guests.Count : null;
                     Guests = rsvp.Guests.ToList();
+                    SongRequest = rsvp.SongRequest;
                 }
                 else
                 {
                     NumGuests = null;
                     Attending = null;
                     Guests = new List<Guest>();
+                    SongRequest = string.Empty;
                 }
 
                 while (Guests.Count < Invitation.MaxAllowedGuests)
@@ -47,5 +49,7 @@ namespace BrianChristyWedding.Models
         public int? NumGuests { get; set; }
 
         public List<Guest> Guests { get; set; }
+
+        public string SongRequest { get; set; }
     }
 }

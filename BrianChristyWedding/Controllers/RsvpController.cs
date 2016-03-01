@@ -45,7 +45,7 @@ namespace BrianChristyWedding.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit([Bind(Include = "InvitationID,Attending,NumGuests,Guests")] RsvpEntryViewModel rsvpVM)
+        public ActionResult Submit([Bind(Include = "InvitationID,Attending,NumGuests,Guests,SongRequest")] RsvpEntryViewModel rsvpVM)
         {
             //Persist the Invitation information across requests
             var invitation = db.Invitations.Find(rsvpVM.InvitationID);
@@ -59,7 +59,8 @@ namespace BrianChristyWedding.Controllers
                 {
                     InvitationID = rsvpVM.InvitationID,
                     Guests = rsvpVM.Guests,
-                    Attending = rsvpVM.Attending.GetValueOrDefault()
+                    Attending = rsvpVM.Attending.GetValueOrDefault(),
+                    SongRequest = rsvpVM.SongRequest
                 };
                 AddOrUpdateRsvp(rsvp);
                 db.SaveChanges();
@@ -79,6 +80,8 @@ namespace BrianChristyWedding.Controllers
             var rsvpToUpdate = db.Rsvps.Find(rsvp.InvitationID);
             if (rsvpToUpdate != null)
             {
+                rsvpToUpdate.Attending = rsvp.Attending;
+                rsvpToUpdate.SongRequest = rsvp.SongRequest;
                 db.Entry(rsvpToUpdate).State = System.Data.Entity.EntityState.Modified;
             }
             else

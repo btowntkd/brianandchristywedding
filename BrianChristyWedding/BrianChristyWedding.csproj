@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201602161644382_RsvpAttendingFlag.Designer.cs">
       <DependentUpon>201602161644382_RsvpAttendingFlag.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603011441040_SongRequest.cs" />
+    <Compile Include="Migrations\201603011441040_SongRequest.Designer.cs">
+      <DependentUpon>201603011441040_SongRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
@@ -295,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602161644382_RsvpAttendingFlag.resx">
       <DependentUpon>201602161644382_RsvpAttendingFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603011441040_SongRequest.resx">
+      <DependentUpon>201603011441040_SongRequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -65,30 +65,45 @@ else
 </div>
 <div class="row" id="sectionGuestInfo" style="background-color: #D0D0D0; display: none;">
     <div class="center-block col-md-12">
-        <h4>Please provide a few additional details...</h4>
-        <table class="table">
+        <h4>Please provide a few additional guest details...</h4>
+        <table class="table center-block col-md-12">
             <thead>
                 <tr>
                     <th></th>
                     <th>First name</th>
                     <th>Last name</th>
                     <th>Age</th>
-                    <th>Dietary Restrictions?</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @for (int x = 0; x < Model.Invitation.MaxAllowedGuests; x++)
                 {
                     <tr class="rowGuestInfo">
-                        <td>Guest #@(x + 1)</td>
-                        <td>@Html.EditorFor(y => y.Guests[x].FirstName)<br />@Html.ValidationMessageFor(y => y.Guests[x].FirstName, "", new { @class = "text-danger" })</td>
-                        <td>@Html.EditorFor(y => y.Guests[x].LastName)<br />@Html.ValidationMessageFor(y => y.Guests[x].LastName, "", new { @class = "text-danger" })</td>
-                        <td>@Html.EnumDropDownListFor(y => y.Guests[x].Age)<br />@Html.ValidationMessageFor(y => y.Guests[x].Age, "", new { @class = "text-danger" })</td>
+                        <td style="vertical-align: middle;">Guest #@(x + 1)</td>
+                        <td style="vertical-align: middle;">@Html.EditorFor(y => y.Guests[x].FirstName, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td style="vertical-align: middle;">@Html.EditorFor(y => y.Guests[x].LastName, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td style="vertical-align: middle;">@Html.EnumDropDownListFor(y => y.Guests[x].Age, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td></td>
+                    </tr>
+                    <tr class="rowGuestErrors">
+                        <td></td>
+                        <td>@Html.ValidationMessageFor(y => y.Guests[x].FirstName, "", new { @class = "text-danger" })</td>
+                        <td>@Html.ValidationMessageFor(y => y.Guests[x].LastName, "", new { @class = "text-danger" })</td>
+                        <td>@Html.ValidationMessageFor(y => y.Guests[x].Age, "", new { @class = "text-danger" })</td>
                         <td></td>
                     </tr>
                 }
             </tbody>
         </table>
+    </div>
+    <div class="col-md-12 form-horizontal">
+        <p>Would you like to request a song to be played at the reception?  Please include the Artist and Title.<br />
+        <em>Example: Queen, "Another One Bites the Dust"</em></p>
+        <div class="form-group">
+            <span class="control-label col-md-3"><strong>(Optional)</strong> Song request</span>
+            @Html.EditorFor(x => x.SongRequest, new { htmlAttributes = new { @class="form-control col-md-9", @style = "width:250px;" } })
+        </div>
     </div>
     <div class="text-center col-md-12">
         <input id="btnSubmit" type="submit" class="btn btn-primary btn-lg" style="width: 90px" value="Submit" />
@@ -194,9 +209,11 @@ else
         }
         function showGuestRow(index) {
             $('.rowGuestInfo').eq(index).fadeIn();
+            $('.rowGuestErrors').eq(index).fadeIn();
         }
         function hideGuestRow(index) {
             $('.rowGuestInfo').eq(index).fadeOut();
+            $('.rowGuestErrors').eq(index).fadeOut();
         }
         function onSubmit() {
             var numGuests = parseInt($('#NumGuests').val());

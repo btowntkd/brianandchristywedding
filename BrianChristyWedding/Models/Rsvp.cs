@@ -18,6 +18,8 @@ namespace BrianChristyWedding.Models
         [Display(Name = "Last updated")]
         public DateTime Updated { get; set; }
 
+        public string SongRequest { get; set; }
+
         public virtual ICollection<Guest> Guests { get; set; }
     }
 }
