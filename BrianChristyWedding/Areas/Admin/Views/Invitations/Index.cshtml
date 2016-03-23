@@ -70,7 +70,7 @@
         <th>Total</th>
         <th>Answered</th>
         <th>Unanswered</th>
-        <th>Percent Received</th>
+        <th>Percent Responded</th>
     </tr>
     <tr>
         <th>Invitations</th>
@@ -108,13 +108,27 @@
         <th>Attending</th>
         <th>Not Attending</th>
         <th>Remaining</th>
+        <th>Attending Percentage</th>
+        <th>Estimated Turnout</th>
         <th>Worst-Case Scenario</th>
     </tr>
     <tr>
         <th>Guests</th>
         <td>@totalAttendingGuests</td>
         <td>@totalNotAttendingGuests</td>
-        <td>@(totalInvitedGuests - (totalAttendingGuests + totalNotAttendingGuests))</td>
+        <td>
+            @{
+                var remainingGuests = totalInvitedGuests - (totalAttendingGuests + totalNotAttendingGuests);
+            }
+            @remainingGuests
+        </td>
+        <td>
+            @{
+                percent = (double)totalAttendingGuests / (double)(totalAttendingGuests + totalNotAttendingGuests) * 100.0;
+                @Html.Raw(percent.ToString("N0") + "%");
+            }
+        </td>
+        <td>@(totalAttendingGuests + (remainingGuests * (percent / 100)))</td>
         <td>@(totalInvitedGuests - totalNotAttendingGuests)</td>
     </tr>
 </table>
