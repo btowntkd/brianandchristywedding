@@ -80,3 +80,12 @@ textarea {
     font-family: Courier New, Courier, monospace;
     font-size: 18px;
 }
+
+.heart {
+    display: inline-block;
+    width: 36px;
+    height: auto;
+    margin: 0px 15px;
+    padding: 0;
+    vertical-align: top;
+}
