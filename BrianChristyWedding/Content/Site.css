@@ -46,18 +46,6 @@ textarea {
 
 @font-face {
     font-family: 'pressStart';
-    /*src: url('/Content/font/lunchds-webfont.eot');
-    src: url('/Content/font/lunchds-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/Content/font/lunchds-webfont.woff2') format('woff2'),
-         url('/Content/font/lunchds-webfont.woff') format('woff'),
-         url('/Content/font/lunchds-webfont.ttf') format('truetype'),
-         url('/Content/font/lunchds-webfont.svg#lunchtime_doubly_soregular') format('svg');*/
-    /*src: url('/Content/font/arcadeclassic-webfont.eot');
-    src: url('/Content/font/arcadeclassic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/Content/font/arcadeclassic-webfont.woff2') format('woff2'),
-         url('/Content/font/arcadeclassic-webfont.woff') format('woff'),
-         url('/Content/font/arcadeclassic-webfont.ttf') format('truetype'),
-         url('/Content/font/arcadeclassic-webfont.svg#lunchtime_doubly_soregular') format('svg');*/
     src: url('/Content/font/pressstart2p-webfont.eot');
     src: url('/Content/font/pressstart2p-webfont.eot?#iefix') format('embedded-opentype'),
          url('/Content/font/pressstart2p-webfont.woff2') format('woff2'),
