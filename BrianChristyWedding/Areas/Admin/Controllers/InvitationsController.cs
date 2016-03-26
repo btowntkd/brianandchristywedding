@@ -141,20 +141,48 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
                 {
                     csvResult.AppendLine(
                         string.Join(",",
-                            invitation.ID,
-                            invitation.FirstName,
-                            invitation.LastName,
-                            invitation.Shortcode,
-                            invitation.MaxAllowedGuests,
-                            invitation.Address.AddressLine1,
-                            invitation.Address.AddressLine2,
-                            invitation.Address.City,
-                            invitation.Address.State,
-                            invitation.Address.Zip));
+                            StringToCsvCell(invitation.ID.ToString()),
+                            StringToCsvCell(invitation.FirstName),
+                            StringToCsvCell(invitation.LastName),
+                            StringToCsvCell(invitation.Shortcode),
+                            StringToCsvCell(invitation.MaxAllowedGuests.ToString()),
+                            StringToCsvCell(invitation.Address.AddressLine1),
+                            StringToCsvCell(invitation.Address.AddressLine2),
+                            StringToCsvCell(invitation.Address.City),
+                            StringToCsvCell(invitation.Address.State),
+                            StringToCsvCell(invitation.Address.Zip)));
                 }
                 return File(System.Text.Encoding.UTF8.GetBytes(csvResult.ToString()), "text/csv", "Invitations.csv");
             }
             return HttpNotFound();
+        }
+
+        /// <summary>
+        /// Turn a string into a CSV cell output
+        /// </summary>
+        /// <param name="str">String to output</param>
+        /// <returns>The CSV cell formatted string</returns>
+        private static string StringToCsvCell(string str)
+        {
+            if(string.IsNullOrWhiteSpace(str))
+                return string.Empty;
+
+            bool mustQuote = (str.Contains(",") || str.Contains("\"") || str.Contains("\r") || str.Contains("\n"));
+            if (mustQuote)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("\"");
+                foreach (char nextChar in str)
+                {
+                    sb.Append(nextChar);
+                    if (nextChar == '"')
+                        sb.Append("\"");
+                }
+                sb.Append("\"");
+                return sb.ToString();
+            }
+
+            return str;
         }
 
         protected override void Dispose(bool disposing)
