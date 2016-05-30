@@ -49,7 +49,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,MaxAllowedGuests,Address")] Invitation invitation)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,CustomAddressLabelName,MaxAllowedGuests,Address")] Invitation invitation)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,MaxAllowedGuests,Shortcode,Address")] Invitation invitation)
+        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,CustomAddressLabelName,MaxAllowedGuests,Shortcode,Address")] Invitation invitation)
         {
             if (ModelState.IsValid)
             {
@@ -130,6 +130,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
                         "ID",
                         "FirstName",
                         "LastName",
+                        "CustomLabelName",
                         "Shortcode",
                         "MaxAllowedGuests",
                         "AddressLine1",
@@ -144,6 +145,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
                             StringToCsvCell(invitation.ID.ToString()),
                             StringToCsvCell(invitation.FirstName),
                             StringToCsvCell(invitation.LastName),
+                            StringToCsvCell(invitation.CustomAddressLabelName),
                             StringToCsvCell(invitation.Shortcode),
                             StringToCsvCell(invitation.MaxAllowedGuests.ToString()),
                             StringToCsvCell(invitation.Address.AddressLine1),
