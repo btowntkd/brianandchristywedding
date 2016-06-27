@@ -123,68 +123,26 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         {
             if (format == "csv")
             {
-                var invitations = db.Invitations.Include(i => i.Rsvp);
-                var csvResult = new StringBuilder();
-                csvResult.AppendLine(
-                    string.Join(",",
-                        "ID",
-                        "FirstName",
-                        "LastName",
-                        "CustomLabelName",
-                        "Shortcode",
-                        "MaxAllowedGuests",
-                        "AddressLine1",
-                        "AddressLine2",
-                        "City",
-                        "State",
-                        "Zip"));
-                foreach (var invitation in invitations)
-                {
-                    csvResult.AppendLine(
-                        string.Join(",",
-                            StringToCsvCell(invitation.ID.ToString()),
-                            StringToCsvCell(invitation.FirstName),
-                            StringToCsvCell(invitation.LastName),
-                            StringToCsvCell(invitation.CustomAddressLabelName),
-                            StringToCsvCell(invitation.Shortcode),
-                            StringToCsvCell(invitation.MaxAllowedGuests.ToString()),
-                            StringToCsvCell(invitation.Address.AddressLine1),
-                            StringToCsvCell(invitation.Address.AddressLine2),
-                            StringToCsvCell(invitation.Address.City),
-                            StringToCsvCell(invitation.Address.State),
-                            StringToCsvCell(invitation.Address.Zip)));
-                }
-                return File(System.Text.Encoding.UTF8.GetBytes(csvResult.ToString()), "text/csv", "Invitations.csv");
+                var invitations = db.Invitations;
+                var csvResult = CsvGenerator.Generate(
+                    invitations,
+                    new CsvColumn<Invitation>("ID", x => x.ID),
+                    new CsvColumn<Invitation>("FirstName", x => x.FirstName),
+                    new CsvColumn<Invitation>("LastName", x => x.LastName),
+                    new CsvColumn<Invitation>("CustomLabelName", x => x.CustomAddressLabelName),
+                    new CsvColumn<Invitation>("Shortcode", x => x.Shortcode.ToUpper()),
+                    new CsvColumn<Invitation>("MaxAllowedGuests", x => x.MaxAllowedGuests),
+                    new CsvColumn<Invitation>("AddressLine1", x => x.Address.AddressLine1),
+                    new CsvColumn<Invitation>("AddressLine2", x => x.Address.AddressLine2),
+                    new CsvColumn<Invitation>("City", x => x.Address.City),
+                    new CsvColumn<Invitation>("State", x => x.Address.State),
+                    new CsvColumn<Invitation>("Zip", x => x.Address.Zip),
+                    new CsvColumn<Invitation>("ShortcodeLink", x => "http://BrianAndChristyWedding.com/RSVP/" + x.Shortcode.ToUpper()),
+                    new CsvColumn<Invitation>("EffectiveAddressName", x => string.IsNullOrWhiteSpace(x.CustomAddressLabelName) ? x.FirstName + " " + x.LastName : x.CustomAddressLabelName));
+                
+                return File(System.Text.Encoding.UTF8.GetBytes(csvResult), "text/csv", "Invitations.csv");
             }
             return HttpNotFound();
-        }
-
-        /// <summary>
-        /// Turn a string into a CSV cell output
-        /// </summary>
-        /// <param name="str">String to output</param>
-        /// <returns>The CSV cell formatted string</returns>
-        private static string StringToCsvCell(string str)
-        {
-            if(string.IsNullOrWhiteSpace(str))
-                return string.Empty;
-
-            bool mustQuote = (str.Contains(",") || str.Contains("\"") || str.Contains("\r") || str.Contains("\n"));
-            if (mustQuote)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("\"");
-                foreach (char nextChar in str)
-                {
-                    sb.Append(nextChar);
-                    if (nextChar == '"')
-                        sb.Append("\"");
-                }
-                sb.Append("\"");
-                return sb.ToString();
-            }
-
-            return str;
         }
 
         protected override void Dispose(bool disposing)

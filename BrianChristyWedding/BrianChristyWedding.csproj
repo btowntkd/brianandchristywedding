@@ -162,6 +162,7 @@
     <Compile Include="BasicAuthenticationAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RsvpController.cs" />
+    <Compile Include="CsvGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
