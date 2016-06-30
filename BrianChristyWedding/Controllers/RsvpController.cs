@@ -62,7 +62,8 @@ namespace BrianChristyWedding.Controllers
                     InvitationID = rsvpVM.InvitationID,
                     Guests = rsvpVM.Guests,
                     Attending = rsvpVM.Attending.GetValueOrDefault(),
-                    SongRequest = rsvpVM.SongRequest
+                    SongRequest = rsvpVM.SongRequest,
+                    Invitation = rsvpVM.Invitation
                 };
                 AddOrUpdateRsvp(rsvp);
                 db.SaveChanges();
@@ -126,13 +127,16 @@ namespace BrianChristyWedding.Controllers
                     messageBody.AppendFormat("<p>An RSVP has been submitted (or updated) from <strong>{0}</strong>.</p>", rsvp.Invitation.EffectiveName);
                     messageBody.Append("<dl>");
                     messageBody.AppendFormat("<dt>Attending?:</dt><dd>{0}</dd>", rsvp.Attending ? "Yes" : "No");
-                    messageBody.Append("<d><dt>Guests:</dt><dd><ul>");
-                    foreach (var guest in rsvp.Guests)
+                    if (rsvp.Attending)
                     {
-                        messageBody.AppendFormat("<li>{0} ({1})</li>", guest.FirstName + " " + guest.LastName, guest.Age);
+                        messageBody.Append("<d><dt>Guests:</dt><dd><ul>");
+                        foreach (var guest in rsvp.Guests)
+                        {
+                            messageBody.AppendFormat("<li>{0} ({1})</li>", guest.FirstName + " " + guest.LastName, guest.Age);
+                        }
+                        messageBody.Append("</ul></dd>");
+                        messageBody.AppendFormat("<dt>Song request:</dt><dd>{0}</dd>", string.IsNullOrWhiteSpace(rsvp.SongRequest) ? "[None]" : rsvp.SongRequest);
                     }
-                    messageBody.Append("</ul></dd>");
-                    messageBody.AppendFormat("<dt>Song request:</dt><dd>{0}</dd>", string.IsNullOrWhiteSpace(rsvp.SongRequest) ? "[None]" : rsvp.SongRequest);
                     messageBody.Append("</dl>");
 
 
