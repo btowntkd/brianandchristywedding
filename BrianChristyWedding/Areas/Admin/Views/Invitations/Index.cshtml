@@ -131,7 +131,7 @@
                 @Html.Raw(percent.ToString("N0") + "%");
             }
         </td>
-        <td>@(totalAttendingGuests + (remainingGuests * (percent / 100)))</td>
+        <td>@((int)(totalAttendingGuests + (remainingGuests * (percent / 100))))</td>
         <td>@(totalInvitedGuests - totalNotAttendingGuests)</td>
     </tr>
 </table>
