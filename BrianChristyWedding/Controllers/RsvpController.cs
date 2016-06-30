@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -89,6 +91,8 @@ namespace BrianChristyWedding.Controllers
                 db.Rsvps.Add(rsvp);
             }
             AddOrUpdateGuests(rsvp.InvitationID, rsvp.Guests);
+            SendEmailNotification(rsvp);
+
         }
 
         private void AddOrUpdateGuests(int invitationID, ICollection<Guest> guests)
@@ -102,6 +106,46 @@ namespace BrianChristyWedding.Controllers
             {
                 guest.RsvpID = invitationID;
                 db.Guests.Add(guest);
+            }
+        }
+
+        private void SendEmailNotification(Rsvp rsvp)
+        {
+            try
+            {
+                using (var smtp = new SmtpClient())
+                {
+                    var mail = new MailMessage();
+                    mail.To.Add("bcpratt@live.com");
+                    mail.To.Add("chrispy115@gmail.com");
+                    mail.Subject = "Wedding RSVP Submitted or Updated";
+                    mail.ReplyToList.Clear();
+                    mail.ReplyToList.Add("no-reply@BrianAndChristyWedding.com");
+
+                    var messageBody = new StringBuilder();
+                    messageBody.AppendFormat("<p>An RSVP has been submitted (or updated) from <strong>{0}</strong>.</p>", rsvp.Invitation.EffectiveName);
+                    messageBody.Append("<dl>");
+                    messageBody.AppendFormat("<dt>Attending?:</dt><dd>{0}</dd>", rsvp.Attending ? "Yes" : "No");
+                    messageBody.Append("<d><dt>Guests:</dt><dd><ul>");
+                    foreach (var guest in rsvp.Guests)
+                    {
+                        messageBody.AppendFormat("<li>{0} ({1})</li>", guest.FirstName + " " + guest.LastName, guest.Age);
+                    }
+                    messageBody.Append("</ul></dd>");
+                    messageBody.AppendFormat("<dt>Song request:</dt><dd>{0}</dd>", string.IsNullOrWhiteSpace(rsvp.SongRequest) ? "[None]" : rsvp.SongRequest);
+                    messageBody.Append("</dl>");
+
+
+
+                    mail.Body = messageBody.ToString();
+                    mail.IsBodyHtml = true;
+
+                    smtp.Send(mail);
+                }
+            }
+            catch (Exception)
+            {
+                //Do nothing
             }
         }
     }

@@ -29,6 +29,11 @@ namespace BrianChristyWedding.Models
         [Display(Name = "Custom address label name")]
         public string CustomAddressLabelName { get; set; }
 
+        public string EffectiveName
+        {
+            get { return string.IsNullOrWhiteSpace(CustomAddressLabelName) ? FirstName + " " + LastName : CustomAddressLabelName; }
+        }
+
         [Display(Name = "Guests allowed")]
         public int MaxAllowedGuests { get; set; }
 
