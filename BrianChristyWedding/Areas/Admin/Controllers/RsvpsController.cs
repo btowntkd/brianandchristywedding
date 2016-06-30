@@ -19,7 +19,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var rsvps = db.Rsvps.Include(r => r.Invitation);
-            return View(rsvps.ToList());
+            return View(rsvps.OrderBy(x => x.Updated).ToList());
         }
 
         // GET: Admin/Rsvps/Details/5
