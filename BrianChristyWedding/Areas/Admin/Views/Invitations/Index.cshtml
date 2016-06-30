@@ -53,11 +53,12 @@
         {
             totalAttendingResponses++;
             totalAttendingGuests += item.Rsvp.Guests.Count;
+            totalNotAttendingGuests += (item.MaxAllowedGuests - item.Rsvp.Guests.Count);
         }
         else
         {
             totalNotAttendingResponses++;
-            totalNotAttendingGuests += item.Rsvp.Guests.Count;
+            totalNotAttendingGuests += item.MaxAllowedGuests;
         }
     }
 }
