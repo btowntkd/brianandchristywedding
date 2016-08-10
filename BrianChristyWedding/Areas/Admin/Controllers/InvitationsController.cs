@@ -137,7 +137,7 @@ namespace BrianChristyWedding.Areas.Admin.Controllers
                     new CsvColumn<Invitation>("City", x => x.Address.City),
                     new CsvColumn<Invitation>("State", x => x.Address.State),
                     new CsvColumn<Invitation>("Zip", x => x.Address.Zip),
-                    new CsvColumn<Invitation>("ShortcodeLink", x => "http://BrianAndChristyWedding.com/RSVP/" + x.Shortcode.ToUpper()),
+                    new CsvColumn<Invitation>("Shortcode_Link", x => "http://BrianAndChristyWedding.com/RSVP/" + x.Shortcode.ToUpper()),
                     new CsvColumn<Invitation>("EffectiveAddressName", x => string.IsNullOrWhiteSpace(x.CustomAddressLabelName) ? x.FirstName + " " + x.LastName : x.CustomAddressLabelName));
                 
                 return File(System.Text.Encoding.UTF8.GetBytes(csvResult), "text/csv", "Invitations.csv");
